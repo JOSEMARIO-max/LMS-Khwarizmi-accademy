@@ -2,6 +2,7 @@
   import { fade, fly, slide } from "svelte/transition";
   import * as XLSX from "xlsx";
   import toast, { Toaster } from "svelte-french-toast";
+  import { Users, Wallet, BookMarked, ClipboardList, BarChart3, ArrowRight, CalendarDays } from "@lucide/svelte";
 
   // --- DATA MANAGEMENT ---
   
@@ -20,10 +21,10 @@
 
   // Data Statistik & Inventory
   const adminStats = [
-    { label: "Total Students", value: "1,205", grow: "+12%", icon: "👥", color: "bg-[#0D9488]/10 text-[#0D9488]" },
-    { label: "Total Revenue", value: "Rp 45.2M", grow: "+8%", icon: "💰", color: "bg-[#14B8A6]/10 text-[#14B8A6]" },
-    { label: "Active Courses", value: "48", grow: "+2", icon: "📚", color: "bg-[#F59E0B]/10 text-[#F59E0B]" },
-    { label: "New Assignments", value: "156", grow: "Pending", icon: "📝", color: "bg-slate-100 text-slate-600" },
+    { label: "Total Students", value: "1,205", grow: "+12%", icon: Users, color: "bg-[#0D9488]/10 text-[#0D9488]" },
+    { label: "Total Revenue", value: "Rp 45.2M", grow: "+8%", icon: Wallet, color: "bg-[#14B8A6]/10 text-[#14B8A6]" },
+    { label: "Active Courses", value: "48", grow: "+2", icon: BookMarked, color: "bg-[#F59E0B]/10 text-[#F59E0B]" },
+    { label: "New Assignments", value: "156", grow: "Pending", icon: ClipboardList, color: "bg-slate-100 text-slate-600" },
   ];
 
   let courseManagement = $state([
@@ -61,7 +62,7 @@
 
     <div class="flex items-center gap-4">
       <button onclick={exportToExcel} class="group flex items-center gap-2 bg-white border border-slate-200 px-6 py-3.5 rounded-2xl text-sm font-bold text-slate-700 hover:border-[#14B8A6] hover:text-[#0D9488] transition-all shadow-sm active:scale-95 cursor-pointer">
-        📊 Export Performance
+        <BarChart3 size={18} /> Export Performance
       </button>
       <a href="/admin/content/create" class="bg-[#F59E0B] text-white px-8 py-3.5 rounded-2xl text-sm font-black hover:bg-slate-900 transition-all shadow-lg active:scale-95 no-underline uppercase tracking-widest ">
         + New Course
@@ -71,10 +72,11 @@
 
   <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
     {#each adminStats as stat}
+      {@const StatIcon = stat.icon}
       <div class="bg-white p-7 rounded-[2.5rem] border border-slate-100 shadow-sm space-y-4 hover:shadow-xl transition-all group">
         <div class="flex justify-between items-start">
-          <div class="w-14 h-14 rounded-2xl flex items-center justify-center text-2xl {stat.color} group-hover:scale-110 transition-transform">
-            {stat.icon}
+          <div class="w-14 h-14 rounded-2xl flex items-center justify-center {stat.color} group-hover:scale-110 transition-transform">
+            <StatIcon size={26} />
           </div>
           <span class="text-[10px] font-black px-3 py-1 rounded-full bg-slate-50 border border-slate-100 uppercase tracking-tighter">
             {stat.grow}
@@ -129,7 +131,7 @@
     </span>
     
     <span class="text-slate-300 group-hover:text-[#14B8A6] transition-transform group-hover:translate-x-1 duration-300">
-      →
+      <ArrowRight size={18} />
     </span>
   </div>
 </a>
@@ -180,8 +182,8 @@
             {/each}
           </div>
 
-          <a href="/admin/calender" class="w-full py-5 bg-white text-slate-900 rounded-[2rem] font-black text-[10px] uppercase tracking-[0.3em] transition-all hover:bg-[#F59E0B] hover:text-white shadow-xl  flex items-center justify-center no-underline">
-            📅 CHECK SCHEDULE
+          <a href="/admin/calender" class="w-full py-5 bg-white text-slate-900 rounded-[2rem] font-black text-[10px] uppercase tracking-[0.3em] transition-all hover:bg-[#F59E0B] hover:text-white shadow-xl flex items-center justify-center gap-2 no-underline">
+            <CalendarDays size={16} /> CHECK SCHEDULE
           </a>
         </div>
       </div>

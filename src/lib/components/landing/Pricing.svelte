@@ -1,6 +1,7 @@
 <script lang="ts">
   import { fade, scale } from "svelte/transition";
   import toast, { Toaster } from "svelte-french-toast";
+  import { Gem, X, CreditCard, Check, Lock, ShieldCheck, Flame, Rocket } from "@lucide/svelte";
   // Jika menggunakan SvelteKit, gunakan alias $lib atau import path yang sesuai
   // Di Svelte 5, kita bisa menggunakan runes untuk state global atau lokal
 
@@ -15,7 +16,7 @@
   /* --- LOGIC --- */
   function openPaymentModal() {
     if (isPremium) {
-      toast.success("Akun kamu sudah PRO (Active)!", { icon: "✅" });
+      toast.success("Akun kamu sudah PRO (Active)!");
       // Ganti dengan logic navigasi Anda
       return;
     }
@@ -36,7 +37,6 @@
 
       toast.success(`Pembayaran via ${selectedPayment.toUpperCase()} Berhasil!`, {
         duration: 5000,
-        icon: "🎉",
       });
 
       // Redirect logic di sini
@@ -50,8 +50,8 @@
   <div class="fixed inset-0 z-[9999] grid place-items-center bg-black/60 p-4 backdrop-blur-sm" transition:fade={{ duration: 200 }}>
     <div class="relative w-full max-w-md overflow-hidden rounded-[2rem] bg-white shadow-2xl" transition:scale={{ duration: 200, start: 0.95 }}>
       <div class="flex items-center justify-between bg-orange-50 px-6 py-5">
-        <h3 class="font-bold text-orange-900 text-lg">Checkout PRO 💎</h3>
-        <button class="text-2xl text-orange-900 transition-hover hover:rotate-90" onclick={() => (showPaymentModal = false)}> ✕ </button>
+        <h3 class="inline-flex items-center gap-2 font-bold text-orange-900 text-lg"><Gem size={18} /> Checkout PRO</h3>
+        <button aria-label="Tutup" class="text-orange-900 transition-hover hover:rotate-90" onclick={() => (showPaymentModal = false)}><X size={22} /></button>
       </div>
 
       <div class="border-b border-gray-100 bg-gray-50 px-8 py-6">
@@ -75,16 +75,16 @@
               onclick={() => (selectedPayment = method)}
             >
               <div
-                class="text-xs font-black tracking-widest uppercase
+                class="flex h-6 items-center text-xs font-black tracking-widest uppercase
                 {method === 'bca' ? 'text-blue-700' : method === 'mandiri' ? 'text-yellow-600' : method === 'gopay' ? 'text-cyan-500' : 'text-gray-600'}"
               >
-                {method === "card" ? "💳" : method}
+                {#if method === "card"}<CreditCard size={20} />{:else}{method}{/if}
               </div>
               <span class="text-[10px] font-medium text-gray-400">
                 {method === "card" ? "Debit/Credit" : method === "gopay" ? "E-Wallet" : "Virtual Account"}
               </span>
               {#if selectedPayment === method}
-                <div class="absolute top-2 right-2 flex h-4 w-4 items-center justify-center rounded-full bg-orange-500 text-[8px] text-white">✓</div>
+                <div class="absolute top-2 right-2 flex h-4 w-4 items-center justify-center rounded-full bg-orange-500 text-white"><Check size={10} strokeWidth={3} /></div>
               {/if}
             </button>
           {/each}
@@ -92,10 +92,10 @@
       </div>
 
       <div class="px-8 pb-8">
-        <button class="w-full rounded-2xl bg-gray-900 py-4 font-bold text-white transition-all hover:bg-orange-600 active:scale-95 disabled:bg-gray-300" disabled={isLoading} onclick={processPayment}>
-          {isLoading ? "Memproses..." : "Bayar Sekarang 🔒"}
+        <button class="inline-flex w-full items-center justify-center gap-2 rounded-2xl bg-gray-900 py-4 font-bold text-white transition-all hover:bg-orange-600 active:scale-95 disabled:bg-gray-300" disabled={isLoading} onclick={processPayment}>
+          {#if isLoading}Memproses...{:else}<Lock size={16} /> Bayar Sekarang{/if}
         </button>
-        <p class="mt-4 text-center text-[10px] text-gray-400">🔒 Pembayaran terenkripsi dan aman.</p>
+        <p class="mt-4 inline-flex w-full items-center justify-center gap-1.5 text-center text-[10px] text-gray-400"><ShieldCheck size={12} /> Pembayaran terenkripsi dan aman.</p>
       </div>
     </div>
   </div>
@@ -117,24 +117,24 @@
           <div class="text-3xl font-black text-gray-900">Rp 99rb <span class="text-sm font-medium text-gray-400">/ kursus</span></div>
         </div>
         <ul class="mb-10 flex-1 space-y-4 text-sm text-gray-600">
-          <li class="flex items-center gap-3">✅ <span>Akses Video Selamanya</span></li>
-          <li class="flex items-center gap-3 text-gray-300">❌ <span>Akses Kursus Lain</span></li>
+          <li class="flex items-center gap-3"><Check size={18} class="text-kh-teal shrink-0" /> <span>Akses Video Selamanya</span></li>
+          <li class="flex items-center gap-3 text-gray-300"><X size={18} class="shrink-0" /> <span>Akses Kursus Lain</span></li>
         </ul>
         <a href="/courses" class="rounded-full border-2 border-gray-100 py-4 text-center font-bold text-gray-700 transition-hover hover:border-gray-900">Katalog Kelas</a>
       </div>
 
       <div class="relative flex flex-col rounded-[2rem] bg-gray-900 p-10 text-white shadow-2xl shadow-orange-200 lg:scale-105">
-        <div class="absolute -top-4 left-1/2 -translate-x-1/2 rounded-full bg-orange-500 px-4 py-1 text-[10px] font-black tracking-widest">PALING HEMAT 🔥</div>
+        <div class="absolute -top-4 left-1/2 -translate-x-1/2 inline-flex items-center gap-1.5 rounded-full bg-orange-500 px-4 py-1 text-[10px] font-black tracking-widest"><Flame size={12} /> PALING HEMAT</div>
         <h3 class="text-xl font-bold">Khwarizmi PRO</h3>
         <div class="my-6 text-white">
           <span class="text-sm font-medium opacity-60">Hanya</span>
           <div class="text-3xl font-black">Rp 150rb <span class="text-sm font-medium opacity-50">/ bulan</span></div>
         </div>
         <ul class="mb-10 flex-1 space-y-4 text-sm opacity-90">
-          <li class="flex items-center gap-3">✅ <strong>Akses SEMUA 8+ Kursus</strong></li>
-          <li class="flex items-center gap-3">✅ Sertifikat Jalur Karir</li>
+          <li class="flex items-center gap-3"><Check size={18} class="text-orange-400 shrink-0" /> <strong>Akses SEMUA 8+ Kursus</strong></li>
+          <li class="flex items-center gap-3"><Check size={18} class="text-orange-400 shrink-0" /> Sertifikat Jalur Karir</li>
         </ul>
-        <button onclick={openPaymentModal} class="rounded-full bg-white py-4 font-bold text-orange-600 transition-all hover:scale-105 active:scale-95"> Langganan Sekarang 🚀 </button>
+        <button onclick={openPaymentModal} class="inline-flex items-center justify-center gap-2 rounded-full bg-white py-4 font-bold text-orange-600 transition-all hover:scale-105 active:scale-95">Langganan Sekarang <Rocket size={18} /></button>
       </div>
 
       <div class="flex flex-col rounded-[2rem] border border-gray-100 bg-white p-10 transition-all hover:shadow-xl">

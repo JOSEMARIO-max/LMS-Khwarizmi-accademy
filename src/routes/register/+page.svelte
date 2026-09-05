@@ -1,6 +1,7 @@
 <script lang="ts">
   import { goto } from "$app/navigation";
   import { fade, fly } from "svelte/transition";
+  import { ArrowLeft, Sparkles } from "@lucide/svelte";
 
   let name = $state("");
   let email = $state("");
@@ -24,7 +25,7 @@
   <div class="absolute bottom-0 left-0 w-96 h-96 bg-teal-200/10 blur-[100px] -translate-x-1/2 translate-y-1/2"></div>
 
   <a href="/" class="absolute top-8 left-8 flex items-center gap-2 bg-white px-5 py-2.5 rounded-full text-sm font-bold text-slate-600 shadow-sm border border-slate-100 transition-all hover:-translate-x-1 hover:text-orange-600 z-50">
-    <span>←</span> Back to Home
+    <ArrowLeft size={16} /> Back to Home
   </a>
 
   <div class="w-full max-w-5xl grid lg:grid-cols-2 gap-16 items-center relative z-10">
@@ -38,7 +39,7 @@
       </div>
 
       <div class="space-y-6">
-        <h3 class="text-2xl font-semibold text-slate-500">Welcome to the family! ✨</h3>
+        <h3 class="flex items-center gap-2 text-2xl font-semibold text-slate-500">Welcome to the family! <Sparkles size={22} class="text-orange-400" /></h3>
         <h1 class="text-7xl font-black leading-[1.05] tracking-tighter text-slate-900">
           Start Your <br />Bright <span class="text-orange-500 italic">Future</span> Now.
         </h1>

@@ -1,6 +1,7 @@
 <script>
   import { fly, fade } from "svelte/transition";
   import { cubicOut } from "svelte/easing";
+  import { ArrowRight } from "@lucide/svelte";
 </script>
 
 <section class="internship-section">
@@ -21,8 +22,8 @@
           </p>
 
           <div class="action-wrap" in:fly={{ y: 20, delay: 600 }}>
-            <a href="https://internship.khwarizmi.co.id/" target="_blank" rel="noreferrer"class="btn-explore">
-              Lihat Program Internship ➔
+            <a href="https://internship.khwarizmi.co.id/" target="_blank" rel="noreferrer" class="btn-explore inline-flex items-center gap-2">
+              Lihat Program Internship <ArrowRight size={18} />
             </a>
             <span class="info-text">Pendaftaran dibuka sepanjang tahun</span>
           </div>

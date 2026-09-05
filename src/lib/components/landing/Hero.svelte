@@ -1,5 +1,6 @@
 <script lang="ts">
   import { onMount } from "svelte";
+  import { Palette, Check } from "@lucide/svelte";
 
   const words = ["Web Development", "UI/UX DESIGN", "Animation", "Videography", "Frontend Development", "Backend Development"];
   
@@ -98,7 +99,7 @@
           </div>
 
           <div class="absolute -left-10 top-12 z-20 flex animate-[float_6s_ease-in-out_infinite] items-center gap-4 rounded-2xl border border-white/40 bg-white/80 p-4 shadow-xl backdrop-blur-md">
-            <div class="flex h-11 w-11 items-center justify-center rounded-xl bg-orange-50 text-xl">🎨</div>
+            <div class="flex h-11 w-11 items-center justify-center rounded-xl bg-orange-50 text-orange-600"><Palette size={22} /></div>
             <div>
               <p class="text-[9px] font-bold uppercase tracking-widest text-gray-400">Program</p>
               <h4 class="text-sm font-bold text-gray-900 leading-none">UI Design</h4>
@@ -109,8 +110,8 @@
           </div>
 
           <div class="absolute -right-6 bottom-12 z-20 flex animate-[float_6s_ease-in-out_infinite_2s] items-center gap-3 rounded-2xl border border-white/40 bg-white/80 p-4 shadow-xl backdrop-blur-md">
-            <div class="flex h-9 w-9 items-center justify-center rounded-full bg-emerald-500 font-bold text-white shadow-lg shadow-emerald-200">
-              <span class="text-[10px]">✓</span>
+            <div class="flex h-9 w-9 items-center justify-center rounded-full bg-emerald-500 text-white shadow-lg shadow-emerald-200">
+              <Check size={16} strokeWidth={3} />
             </div>
             <div>
               <p class="text-xs font-bold text-gray-900 leading-none">Level Up!</p>

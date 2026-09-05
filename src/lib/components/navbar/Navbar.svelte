@@ -1,5 +1,6 @@
 <script lang="ts">
   import "./navbar.css";
+  import { Menu, X } from "@lucide/svelte";
 
   // State untuk menu mobile
   let isMenuOpen = false;
@@ -31,7 +32,7 @@
 
     <div class="nav-actions">
       <button class="hamburger" on:click={toggleMenu} aria-label="Toggle Menu">
-        {isMenuOpen ? "✕" : "☰"}
+        {#if isMenuOpen}<X size={22} />{:else}<Menu size={22} />{/if}
       </button>
 
       <div class="desktop-auth">

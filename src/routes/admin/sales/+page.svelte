@@ -1,13 +1,14 @@
 <script lang="ts">
   import { fade, fly } from "svelte/transition";
   import toast, { Toaster } from "svelte-french-toast"; // Import Toast
+  import { TrendingUp, CreditCard, RefreshCw, BarChart3, Copy, Flame } from "@lucide/svelte";
 
   // --- SVELTE 5 STATE (SALES DATA) ---
   const revenueStats = [
-    { label: "Total Revenue", value: "Rp 128.400.000", grow: "+15.2%", icon: "📈", color: "bg-[#14B8A6]/10 text-[#0D9488]" },
-    { label: "Sales This Month", value: "Rp 12.500.000", grow: "+5.4%", icon: "💳", color: "bg-[#14B8A6]/10 text-[#14B8A6]" },
-    { label: "Refund Requests", value: "2", grow: "-12%", icon: "🔄", color: "bg-rose-50 text-rose-600" },
-    { label: "Average Order", value: "Rp 185.000", grow: "+2.1%", icon: "📊", color: "bg-[#F59E0B]/10 text-[#F59E0B]" },
+    { label: "Total Revenue", value: "Rp 128.400.000", grow: "+15.2%", icon: TrendingUp, color: "bg-[#14B8A6]/10 text-[#0D9488]" },
+    { label: "Sales This Month", value: "Rp 12.500.000", grow: "+5.4%", icon: CreditCard, color: "bg-[#14B8A6]/10 text-[#14B8A6]" },
+    { label: "Refund Requests", value: "2", grow: "-12%", icon: RefreshCw, color: "bg-rose-50 text-rose-600" },
+    { label: "Average Order", value: "Rp 185.000", grow: "+2.1%", icon: BarChart3, color: "bg-[#F59E0B]/10 text-[#F59E0B]" },
   ];
 
   const topCourses = [
@@ -26,20 +27,14 @@
   function handleExport() {
     const t = toast.loading("Menyiapkan laporan keuangan Khwarizmi...");
     setTimeout(() => {
-      toast.success("Laporan Penjualan berhasil diunduh!", {
-        id: t,
-        icon: "📊",
-      });
+      toast.success("Laporan Penjualan berhasil diunduh!", { id: t });
     }, 1500);
   }
 
   function handleFullReport() {
     const t = toast.loading("Sinkronisasi data gateway...");
     setTimeout(() => {
-      toast.success("Analisis selesai! Membuka dashboard detail", {
-        id: t,
-        icon: "🔥",
-      });
+      toast.success("Analisis selesai! Membuka dashboard detail", { id: t });
     }, 2000);
   }
 
@@ -57,10 +52,11 @@
 <div class="space-y-8 pb-20 font-plus antialiased text-slate-700 mt-4">
   <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
     {#each revenueStats as stat}
+      {@const StatIcon = stat.icon}
       <div class="bg-white p-6 rounded-[2rem] border border-slate-100 shadow-sm space-y-4 transition-all hover:shadow-xl hover:-translate-y-1 group">
         <div class="flex justify-between items-center">
-          <div class="w-12 h-12 rounded-2xl flex items-center justify-center text-xl {stat.color} shadow-inner group-hover:scale-110 transition-transform">
-            {stat.icon}
+          <div class="w-12 h-12 rounded-2xl flex items-center justify-center {stat.color} shadow-inner group-hover:scale-110 transition-transform">
+            <StatIcon size={22} />
           </div>
           <span class="text-[10px] font-black text-emerald-600 bg-emerald-50 px-2.5 py-1 rounded-lg border border-emerald-100 uppercase italic">
             {stat.grow}
@@ -105,7 +101,7 @@
               <tr in:fade class="group hover:bg-[#14B8A6]/5 transition-all duration-300">
                 <td class="px-8 py-5">
                   <button onclick={() => copyTxID(tx.id)} class="text-[11px] font-mono text-slate-400 font-bold uppercase tracking-tighter hover:text-[#0D9488] transition-colors cursor-pointer flex items-center gap-2">
-                    {tx.id} <span class="opacity-0 group-hover:opacity-100 transition-opacity text-[10px]">📋</span>
+                    {tx.id} <span class="opacity-0 group-hover:opacity-100 transition-opacity"><Copy size={12} /></span>
                   </button>
                 </td>
                 <td class="px-6 py-5">
@@ -155,7 +151,7 @@
             <h4 class="text-teal-50 text-[10px] font-black uppercase tracking-[0.25em] mb-1 italic opacity-80">Monthly Growth</h4>
             <p class="text-4xl font-black italic tracking-tighter">+24.8%</p>
           </div>
-          <div class="w-12 h-12 rounded-2xl bg-white/20 backdrop-blur-md flex items-center justify-center text-2xl border border-white/20 shadow-lg transition-transform group-hover:rotate-12">🔥</div>
+          <div class="w-12 h-12 rounded-2xl bg-white/20 backdrop-blur-md flex items-center justify-center border border-white/20 shadow-lg transition-transform group-hover:rotate-12"><Flame size={24} /></div>
         </div>
 
         <div class="flex items-end gap-2 h-20 pt-4 relative z-10">

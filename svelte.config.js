@@ -1,19 +1,17 @@
-import adapter from '@sveltejs/adapter-static';
+import adapter from '@sveltejs/adapter-cloudflare';
 import { vitePreprocess } from '@sveltejs/vite-plugin-svelte';
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
 	preprocess: vitePreprocess(),
 	kit: {
-		 alias: {
-      "@/*": "./path/to/lib/*",
-    },
-		adapter: adapter({
-			fallback: 'index.html'
-		}),
-		  prerender: {
-    handleUnseenRoutes: 'ignore'
-  }
+		adapter: adapter(),
+		alias: {
+			'@/*': './src/lib/*'
+		},
+		prerender: {
+			handleUnseenRoutes: 'ignore'
+		}
 	}
 };
 

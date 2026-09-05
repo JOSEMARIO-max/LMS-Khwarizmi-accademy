@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { ArrowRight } from "@lucide/svelte";
   /* --- SVELTE 5 RUNES --- */
   let scrollY = $state(0);
   let splitContainer = $state<HTMLElement | null>(null);
@@ -38,7 +39,7 @@
             href="/login"
             class="group relative inline-flex items-center gap-3 overflow-hidden rounded-full bg-[#f67d26] px-10 py-5 text-lg font-black uppercase tracking-widest text-white transition-all hover:scale-105 hover:bg-[#ea580c] active:scale-95 shadow-[0_20px_50px_rgba(246,125,38,0.3)]"
           >
-            <span class="relative z-10">Mulai Sekarang ➔</span>
+            <span class="relative z-10 inline-flex items-center gap-2">Mulai Sekarang <ArrowRight size={18} /></span>
             <div class="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/20 to-transparent transition-transform duration-500 group-hover:translate-x-full"></div>
           </a>
 

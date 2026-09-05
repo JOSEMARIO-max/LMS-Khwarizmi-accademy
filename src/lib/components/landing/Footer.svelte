@@ -1,4 +1,12 @@
 <script lang="ts">
+  import { Instagram, Linkedin, Globe, Check, ShieldCheck } from "@lucide/svelte";
+
+  const socials = [
+    { name: "Instagram", icon: Instagram, href: "https://instagram.com" },
+    { name: "LinkedIn", icon: Linkedin, href: "https://linkedin.com" },
+    { name: "Website", icon: Globe, href: "https://khwarizmi.co.id" }
+  ];
+
   /* Svelte 5: Logic untuk newsletter (Opsional) */
   let email = $state("");
   let subscribed = $state(false);
@@ -26,9 +34,10 @@
         </div>
         <p class="max-w-xs text-sm leading-relaxed">Platform edukasi teknologi no.1 di Indonesia. Kami membantu kamu beralih karir ke dunia digital dengan kurikulum praktis dan mentor ahli.</p>
         <div class="flex flex-wrap gap-3">
-          {#each ["Instagram", "LinkedIn", "Website"] as social}
-            <a href="#" class="rounded-full border border-slate-800 bg-slate-900 px-4 py-2 text-[10px] font-bold text-white transition-all hover:bg-[#f67d26] hover:border-[#f67d26] hover:-translate-y-1">
-              {social} ↗
+          {#each socials as social}
+            {@const SocialIcon = social.icon}
+            <a href={social.href} target="_blank" rel="noreferrer" class="inline-flex items-center gap-2 rounded-full border border-slate-800 bg-slate-900 px-4 py-2 text-[10px] font-bold text-white transition-all hover:bg-[#f67d26] hover:border-[#f67d26] hover:-translate-y-1">
+              <SocialIcon size={14} /> {social.name}
             </a>
           {/each}
         </div>
@@ -60,11 +69,11 @@
 
         <form onsubmit={handleSubscribe} class="flex flex-col gap-3">
           <input type="email" bind:value={email} placeholder="Email kamu..." required class="w-full rounded-xl bg-slate-850 border border-slate-700 p-3 text-sm text-white outline-none focus:border-[#f67d26] transition-all" />
-          <button type="submit" class="w-full rounded-xl bg-[#f67d26] py-3 text-sm font-bold text-white transition-all hover:bg-orange-600 active:scale-95">
-            {subscribed ? "Tersambung! ✨" : "Subscribe"}
+          <button type="submit" class="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-[#f67d26] py-3 text-sm font-bold text-white transition-all hover:bg-orange-600 active:scale-95">
+            {#if subscribed}<Check size={16} /> Tersambung!{:else}Subscribe{/if}
           </button>
         </form>
-        <p class="mt-4 text-[10px] text-slate-500 text-center">Data kamu aman 🔒 Kami benci spam.</p>
+        <p class="mt-4 inline-flex items-center justify-center gap-1.5 w-full text-[10px] text-slate-500 text-center"><ShieldCheck size={12} /> Data kamu aman. Kami benci spam.</p>
       </div>
     </div>
 

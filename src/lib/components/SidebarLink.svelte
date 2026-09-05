@@ -1,35 +1,54 @@
 <script lang="ts">
-  /**
-   * Menggunakan Svelte 5 $props untuk menangkap data dari layout.
-   */
-  let { href, icon, label, isSidebarOpen, active = false, isLogout = false } = $props();
+  import type { Component } from "svelte";
+
+  let {
+    href,
+    icon,
+    label,
+    isSidebarOpen,
+    active = false,
+    isLogout = false
+  }: {
+    href: string;
+    icon: Component<{ size?: number; strokeWidth?: number; class?: string }>;
+    label: string;
+    isSidebarOpen: boolean;
+    active?: boolean;
+    isLogout?: boolean;
+  } = $props();
+
+  const Icon = $derived(icon);
 </script>
 
 <a
   {href}
-  class="group flex items-center gap-4 h-12 px-3.5 rounded-xl font-bold transition-all duration-200 whitespace-nowrap
-  {active ? 'bg-orange-50 text-orange-600 shadow-sm shadow-orange-100/50' : 'text-slate-500 hover:bg-slate-50 hover:text-orange-500'}
-  {isLogout ? 'mt-2 text-rose-500 hover:bg-rose-50 hover:text-rose-600' : ''}"
+  class="group relative flex items-center gap-3.5 h-11 px-3 rounded-xl font-semibold transition-colors duration-200 whitespace-nowrap
+  {active
+    ? 'bg-kh-orange-soft text-kh-orange-hover'
+    : 'text-kh-gray hover:bg-kh-surface-2 hover:text-kh-ink'}
+  {isLogout ? 'mt-1 text-rose-500 hover:bg-rose-50 hover:text-rose-600' : ''}"
+  aria-current={active ? "page" : undefined}
 >
-  <span class="text-xl shrink-0 w-6 flex justify-center transition-transform group-hover:scale-110">
-    {icon}
+  {#if active && !isLogout}
+    <span class="absolute left-0 top-1/2 -translate-y-1/2 h-5 w-1 rounded-r-full bg-kh-orange"></span>
+  {/if}
+
+  <span class="shrink-0 flex justify-center transition-transform duration-200 group-hover:scale-110">
+    <Icon size={20} strokeWidth={2} />
   </span>
 
   {#if isSidebarOpen}
-    <span class="text-sm tracking-tight transition-opacity duration-300" aria-hidden={!isSidebarOpen}>
+    <span class="text-sm tracking-tight">{label}</span>
+  {:else}
+    <span
+      class="pointer-events-none absolute left-14 z-50 scale-0 origin-left rounded-lg bg-kh-ink px-2.5 py-1.5 text-xs font-semibold text-white shadow-lg transition-transform duration-150 group-hover:scale-100"
+    >
       {label}
     </span>
-  {/if}
-
-  {#if !isSidebarOpen}
-    <div class="absolute left-16 scale-0 rounded bg-slate-800 px-2 py-1 text-xs text-white group-hover:scale-100 transition-all z-50">
-      {label}
-    </div>
   {/if}
 </a>
 
 <style>
-  /* Menghilangkan dekorasi link default */
   a {
     text-decoration: none;
     -webkit-tap-highlight-color: transparent;

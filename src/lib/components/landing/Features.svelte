@@ -1,28 +1,30 @@
 <script lang="ts">
+  import { Radio, Infinity as InfinityIcon, Wrench, Sprout } from "@lucide/svelte";
+
   // Data fitur dipisah agar kode HTML tetap bersih dan mudah dikelola
   const features = [
     {
       title: "Live Class",
       desc: "Ikuti kelas interaktif bersama praktisi dan mentor Khwarizmi Academy dari mana saja.",
-      icon: "🔴",
+      icon: Radio,
       color: "bg-red-50 text-red-600",
     },
     {
       title: "Lifetime Access",
       desc: "Akses rekaman video kelas kapan saja, di mana saja tanpa batas waktu.",
-      icon: "∞",
+      icon: InfinityIcon,
       color: "bg-orange-50 text-orange-600",
     },
     {
       title: "Practice Based",
       desc: "Pembelajaran berbasis praktik dan project nyata, bukan hanya sekadar teori.",
-      icon: "🛠️",
+      icon: Wrench,
       color: "bg-teal-50 text-teal-600",
     },
     {
       title: "Beginner Friendly",
       desc: "Materi kami mulai dari dasar dan dibahas dari awal, cocok untuk pemula sekalipun.",
-      icon: "🔰",
+      icon: Sprout,
       color: "bg-emerald-50 text-emerald-600",
     },
   ];
@@ -39,9 +41,10 @@
 
     <div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
       {#each features as feature}
+        {@const Icon = feature.icon}
         <div class="group relative rounded-3xl border border-gray-100 bg-white p-8 transition-all duration-300 hover:-translate-y-2 hover:border-orange-100 hover:shadow-2xl hover:shadow-orange-100/50">
-          <div class={`mb-6 flex h-14 w-14 items-center justify-center rounded-2xl text-3xl transition-transform duration-500 group-hover:rotate-[10deg] ${feature.color}`}>
-            {feature.icon}
+          <div class={`mb-6 flex h-14 w-14 items-center justify-center rounded-2xl transition-transform duration-500 group-hover:rotate-[10deg] ${feature.color}`}>
+            <Icon size={26} strokeWidth={2} />
           </div>
 
           <h3 class="mb-3 text-xl font-extrabold text-[#0c2e28]">
