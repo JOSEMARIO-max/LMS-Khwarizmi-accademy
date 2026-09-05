@@ -1,6 +1,7 @@
 <script lang="ts">
   import { fade, fly, slide, scale } from "svelte/transition";
   import toast, { Toaster } from "svelte-french-toast";
+  import { BookMarked, Video, Cloud, MoreVertical, Trash2, Search, SearchX, Plus } from "@lucide/svelte";
 
   // --- DATA DUMMY KONTEN (RUNES) ---
   let courses = $state([
@@ -29,7 +30,7 @@
 
       setTimeout(() => {
         courses = courses.filter((c) => c.id !== courseToDelete?.id);
-        toast.success("Kursus berhasil dihapus!", { id: t, icon: "🗑️" });
+        toast.success("Kursus berhasil dihapus!", { id: t });
         isDeleteModalOpen = false;
         courseToDelete = null;
       }, 1000);
@@ -56,7 +57,7 @@
         <p class="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1 opacity-60 italic">Total Kursus</p>
         <h4 class="text-2xl font-black text-slate-800 italic uppercase">{courses.length}</h4>
       </div>
-      <div class="w-12 h-12 rounded-2xl bg-[#14B8A6]/10 text-[#0D9488] flex items-center justify-center text-2xl shadow-inner">📚</div>
+      <div class="w-12 h-12 rounded-2xl bg-[#14B8A6]/10 text-[#0D9488] flex items-center justify-center shadow-inner"><BookMarked size={24} /></div>
     </div>
 
     <div class="bg-white p-6 rounded-[2rem] border border-slate-100 flex justify-between items-center shadow-sm hover:shadow-md transition-all">
@@ -64,7 +65,7 @@
         <p class="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1 opacity-60 italic">Total Video</p>
         <h4 class="text-2xl font-black text-slate-800 italic uppercase">109</h4>
       </div>
-      <div class="w-12 h-12 rounded-2xl bg-[#F59E0B]/10 text-[#F59E0B] flex items-center justify-center text-2xl shadow-inner">🎥</div>
+      <div class="w-12 h-12 rounded-2xl bg-[#F59E0B]/10 text-[#F59E0B] flex items-center justify-center shadow-inner"><Video size={24} /></div>
     </div>
 
     <div class="bg-gradient-to-br from-[#14B8A6] to-[#0D9488] p-6 rounded-[2rem] shadow-xl shadow-teal-100 flex justify-between items-center text-white group overflow-hidden relative">
@@ -73,19 +74,19 @@
         <p class="text-[10px] font-black text-teal-50 uppercase tracking-widest mb-1 opacity-80 italic">Storage Used</p>
         <h4 class="text-2xl font-black italic tracking-tighter">45.8 GB</h4>
       </div>
-      <div class="w-12 h-12 rounded-2xl bg-white/10 flex items-center justify-center text-2xl relative z-10 border border-white/10 backdrop-blur-sm shadow-lg">☁️</div>
+      <div class="w-12 h-12 rounded-2xl bg-white/10 flex items-center justify-center text-2xl relative z-10 border border-white/10 backdrop-blur-sm shadow-lg"><Cloud size={24} /></div>
     </div>
   </div>
 
   <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
     <div class="relative w-full max-w-md group">
-      <span class="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-[#0D9488] transition-colors font-bold italic">Search</span>
+      <span class="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-[#0D9488] transition-colors"><Search size={18} /></span>
       <input
         type="text"
         bind:value={searchQuery}
         oninput={handleSearchFocus}
         placeholder="Filter by course title..."
-        class="w-full bg-white border border-slate-200 rounded-2xl py-3.5 pl-20 pr-4 text-sm text-slate-700 focus:ring-4 focus:ring-[#14B8A6]/10 focus:border-[#14B8A6] outline-none transition-all shadow-sm italic"
+        class="w-full bg-white border border-slate-200 rounded-2xl py-3.5 pl-12 pr-4 text-sm text-slate-700 focus:ring-4 focus:ring-[#14B8A6]/10 focus:border-[#14B8A6] outline-none transition-all shadow-sm italic"
       />
     </div>
 
@@ -93,7 +94,7 @@
       href="/admin/content/create"
       class="bg-[#F59E0B] hover:bg-slate-900 text-white px-8 py-3.5 rounded-2xl text-sm font-black transition-all active:scale-95 shadow-xl shadow-orange-100 flex items-center justify-center gap-2 italic uppercase tracking-widest"
     >
-      <span class="text-lg leading-none">+</span> Create New Course
+      <Plus size={18} /> Create New Course
     </a>
   </div>
 
@@ -105,7 +106,7 @@
             <span class="text-[9px] font-black text-[#0D9488] bg-[#14B8A6]/10 px-3 py-1 rounded-full uppercase tracking-[0.25em] border border-[#14B8A6]/20 italic">{course.category}</span>
             <h3 class="text-2xl font-black text-slate-800 group-hover:text-[#0D9488] transition-colors leading-tight mt-3 tracking-tight italic uppercase">{course.title}</h3>
           </div>
-          <button class="w-10 h-10 rounded-xl border border-slate-100 text-slate-300 hover:bg-[#0D9488] hover:text-white transition-all flex items-center justify-center font-bold shadow-sm cursor-pointer">⋮</button>
+          <button class="w-10 h-10 rounded-xl border border-slate-100 text-slate-300 hover:bg-[#0D9488] hover:text-white transition-all flex items-center justify-center font-bold shadow-sm cursor-pointer"><MoreVertical size={18} /></button>
         </div>
 
         <div class="grid grid-cols-2 gap-6 py-6 border-y border-slate-100/60 relative z-10 italic">
@@ -138,7 +139,7 @@
               onclick={() => triggerDelete(course.id, course.title)}
               class="w-12 h-12 bg-rose-50 text-rose-500 hover:bg-rose-500 hover:text-white border border-rose-100 rounded-2xl flex items-center justify-center transition-all shadow-sm active:scale-95 cursor-pointer shadow-rose-100/50"
             >
-              🗑️
+              <Trash2 size={18} />
             </button>
           </div>
         </div>
@@ -148,7 +149,7 @@
 
   {#if filteredCourses.length === 0}
     <div in:fade class="py-24 text-center bg-white border-2 border-dashed border-slate-200 rounded-[4rem] shadow-inner">
-      <div class="w-20 h-20 bg-slate-50 rounded-3xl flex items-center justify-center text-4xl mx-auto mb-6 shadow-sm grayscale opacity-50">🔍</div>
+      <div class="w-20 h-20 bg-slate-50 rounded-3xl flex items-center justify-center text-4xl mx-auto mb-6 shadow-sm grayscale opacity-50"><SearchX size={36} /></div>
       <h3 class="text-xl font-black text-slate-300 uppercase tracking-[0.3em] italic">No Courses Found</h3>
       <p class="text-slate-400 text-xs font-bold mt-2 uppercase tracking-widest">Maaf, kursus tidak ditemukan dalam database Khwarizmi.</p>
       <button
