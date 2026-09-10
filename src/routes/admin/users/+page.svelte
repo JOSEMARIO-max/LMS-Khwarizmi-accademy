@@ -63,7 +63,7 @@
     event.stopPropagation(); // Agar tidak memicu openQuickPreview
     if (confirm(`Hapus ${u.name} secara permanen?`)) {
       users = users.filter((usr) => usr.id !== u.id);
-      toast.success("Pengguna berhasil dihapus", { icon: "🗑️" });
+      toast.success("Pengguna berhasil dihapus");
     }
   }
 

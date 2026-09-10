@@ -3,6 +3,7 @@
   import { page } from "$app/state";
   import { goto } from "$app/navigation";
   import toast, { Toaster } from "svelte-french-toast"; // Import Toast
+  import { ArrowLeft, Save, Trash2, Image as ImageIcon, Flag } from "@lucide/svelte";
 
   // Simulasi pengambilan data berdasarkan ID dari URL
   const courseId = page.params.id;
@@ -22,7 +23,6 @@
   function addNewLesson() {
     lessons = [...lessons, { id: Date.now(), title: "", duration: "", isNew: true, url: null }];
     toast.success("Modul materi baru ditambahkan!", {
-      icon: "➕",
       style: "border-radius: 12px; font-size: 13px; font-weight: 800; background: #14B8A6; color: white;",
     });
   }
@@ -31,7 +31,6 @@
     if (confirm("Hapus materi ini secara permanen?")) {
       lessons = lessons.filter((l) => l.id !== id);
       toast.error("Materi telah dihapus", {
-        icon: "🗑️",
         style: "border-radius: 12px; font-weight: 800;",
       });
     }
@@ -42,10 +41,7 @@
 
     // Simulasi Sinkronisasi Data
     setTimeout(() => {
-      toast.success("Kursus Khwarizmi Diperbarui!", {
-        id: t,
-        icon: "✅",
-      });
+      toast.success("Kursus Khwarizmi Diperbarui!", { id: t });
 
       // Delay sedikit sebelum pindah halaman
       setTimeout(() => {
@@ -58,7 +54,7 @@
     if (confirm("Arsip kursus ini? Siswa tidak akan bisa mengaksesnya lagi.")) {
       toast.promise(new Promise((resolve) => setTimeout(resolve, 1000)), {
         loading: "Mengarsipkan kursus...",
-        success: "Kursus berhasil diarsipkan 🚩",
+        success: "Kursus berhasil diarsipkan",
         error: "Gagal mengarsipkan",
       });
     }
@@ -71,7 +67,7 @@
   <div class="flex flex-col md:flex-row items-center justify-between gap-6 mb-10">
     <div class="flex flex-col">
       <a href="/admin/content" class="text-slate-400 hover:text-[#0D9488] font-bold text-[10px] uppercase tracking-widest transition-all mb-2 flex items-center gap-2 italic">
-        <span class="text-base">←</span> Back to Content Manager
+        <ArrowLeft size={15} /> Back to Content Manager
       </a>
       <h1 class="text-3xl font-black text-slate-900 tracking-tighter uppercase italic">
         Edit Course <span class="text-[#14B8A6]">#{courseId}</span>
@@ -82,7 +78,7 @@
         onclick={handleUpdate}
         class="w-full md:w-auto px-10 py-4 rounded-2xl bg-[#14B8A6] text-white font-black text-sm shadow-xl shadow-teal-100 hover:bg-slate-900 transition-all active:scale-95 cursor-pointer uppercase tracking-widest italic"
       >
-        Update Course 💾
+        <span class="inline-flex items-center justify-center gap-2">Update Course <Save size={15} /></span>
       </button>
     </div>
   </div>
@@ -178,7 +174,7 @@
                       onclick={() => removeLesson(lesson.id)}
                       class="w-10 h-10 flex items-center justify-center bg-white border border-slate-100 text-slate-300 hover:text-rose-500 hover:border-rose-200 rounded-xl transition-all shadow-sm cursor-pointer active:scale-90"
                     >
-                      🗑️
+                      <Trash2 size={16} />
                     </button>
                   </div>
                 </div>
@@ -196,7 +192,7 @@
         <h4 class="font-black text-[10px] uppercase tracking-[0.2em] mb-8 text-[#14B8A6] italic opacity-80 relative z-10">Course Live Status</h4>
 
         <div class="aspect-video bg-white/5 rounded-[1.5rem] border border-white/10 flex flex-col items-center justify-center mb-8 group/thumb hover:bg-white/10 transition-all cursor-pointer relative z-10 overflow-hidden">
-          <span class="text-3xl mb-2 group-hover/thumb:scale-110 transition-transform">🖼️</span>
+          <span class="mb-2 group-hover/thumb:scale-110 transition-transform text-white/60"><ImageIcon size={28} /></span>
           <span class="text-[9px] font-black uppercase tracking-widest opacity-40 group-hover/thumb:opacity-100">Update Thumbnail</span>
         </div>
 
@@ -223,7 +219,7 @@
         onclick={handleArchive}
         class="w-full py-5 bg-white border border-rose-100 rounded-[2.5rem] text-[9px] font-black uppercase tracking-[0.3em] text-rose-500 hover:bg-rose-500 hover:text-white transition-all shadow-sm active:scale-95 cursor-pointer italic"
       >
-        Arsip Kursus 🚩
+        <span class="inline-flex items-center justify-center gap-2">Arsip Kursus <Flag size={13} /></span>
       </button>
     </aside>
   </div>

@@ -1,6 +1,7 @@
 <script lang="ts">
   import { ownedCourses } from "$lib/stores";
   import { fade, fly } from "svelte/transition";
+  import { BookOpen, FolderOpen } from "@lucide/svelte";
 
   // --- DATA MASTER ---
   const allLessons = [
@@ -27,14 +28,14 @@
 
 <div class="max-w-7xl mx-auto px-6 py-10 pb-24 font-plus">
   <header class="mb-10 border-b border-slate-100 pb-8">
-    <h1 class="text-3xl font-black text-slate-900 tracking-tight">My Learning 📖</h1>
+    <h1 class="flex items-center gap-3 text-3xl font-black text-slate-900 tracking-tight">My Learning <BookOpen size={26} class="text-kh-orange" /></h1>
     <p class="text-slate-500 font-medium mt-1">Lanjutkan perjalanan belajarmu dan raih mimpimu.</p>
   </header>
 
   <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
     {#if myLessons.length === 0}
       <div class="col-span-full py-20 bg-white border-2 border-dashed border-slate-200 rounded-[3rem] text-center" in:fade>
-        <span class="text-6xl mb-6 block">📂</span>
+        <span class="mb-6 inline-flex text-slate-300"><FolderOpen size={64} strokeWidth={1.5} /></span>
         <h3 class="text-xl font-black text-slate-800">Kamu belum memiliki kursus</h3>
         <p class="text-slate-400 font-medium mt-2">Investasi ilmu adalah investasi terbaik untuk masa depan.</p>
         <a href="/user/courses" class="mt-8 inline-block bg-slate-900 hover:bg-kh-orange text-white px-8 py-3.5 rounded-full font-bold transition-all hover:-translate-y-1"> Eksplorasi Katalog </a>

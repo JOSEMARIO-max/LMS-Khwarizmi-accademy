@@ -1,6 +1,7 @@
 <script lang="ts">
   import { page } from "$app/state";
   import { fade, fly, slide } from "svelte/transition";
+  import { Check, ArrowRight, Star, Users, Wrench, Clock, Play } from "@lucide/svelte";
 
   // --- SVELTE 5 STATE (RUNES) ---
   const courseId = $derived(page.params.id);
@@ -103,9 +104,9 @@
             {completedVideos.includes(currentVideo.id) ? 'bg-emerald-500 text-white shadow-emerald-200' : 'bg-slate-900 text-white hover:bg-[#14B8A6] shadow-slate-200'}"
           >
             {#if completedVideos.includes(currentVideo.id)}
-              <span>✓ Selesai Menonton</span>
+              <span class="inline-flex items-center gap-2"><Check size={15} strokeWidth={3} /> Selesai Menonton</span>
             {:else}
-              <span>Tandai Selesai ➔</span>
+              <span class="inline-flex items-center gap-2">Tandai Selesai <ArrowRight size={15} /></span>
             {/if}
           </button>
         </div>
@@ -121,9 +122,9 @@
             </div>
           </div>
           <div class="flex items-center gap-4 bg-white px-6 py-4 rounded-3xl border border-slate-100 font-black text-xs text-slate-600 shadow-sm">
-            <span class="text-[#F59E0B] italic">⭐ {courseDetail.rating}</span>
+            <span class="inline-flex items-center gap-1.5 text-[#F59E0B] italic"><Star size={14} fill="currentColor" /> {courseDetail.rating}</span>
             <div class="w-1 h-1 bg-slate-200 rounded-full"></div>
-            <span class="italic tracking-tighter">👥 {courseDetail.students} Enrolled</span>
+            <span class="inline-flex items-center gap-1.5 italic tracking-tighter"><Users size={14} /> {courseDetail.students} Enrolled</span>
           </div>
         </div>
 
@@ -157,7 +158,7 @@
                   <div class="flex-1 min-w-0">
                     <h4 class="text-[12px] font-black text-slate-800 uppercase tracking-tight truncate italic">E-Book: UI Design Mastery</h4>
                     <p class="text-[9px] font-bold text-slate-400 uppercase tracking-widest mt-1">Format: PDF • 12.5 MB</p>
-                    <button class="text-[10px] font-black text-[#0D9488] uppercase tracking-widest mt-2 hover:underline">Download File ➔</button>
+                    <button class="text-[10px] font-black text-[#0D9488] uppercase tracking-widest mt-2 inline-flex items-center gap-1.5 hover:underline">Download File <ArrowRight size={13} /></button>
                   </div>
                 </div>
 
@@ -168,7 +169,7 @@
                   <div class="flex-1 min-w-0">
                     <h4 class="text-[12px] font-black text-slate-800 uppercase tracking-tight truncate italic">Project Assets Pack</h4>
                     <p class="text-[9px] font-bold text-slate-400 uppercase tracking-widest mt-1">Icon, Font, & Images</p>
-                    <button class="text-[10px] font-black text-[#0D9488] uppercase tracking-widest mt-2 hover:underline">Download ZIP ➔</button>
+                    <button class="text-[10px] font-black text-[#0D9488] uppercase tracking-widest mt-2 inline-flex items-center gap-1.5 hover:underline">Download ZIP <ArrowRight size={13} /></button>
                   </div>
                 </div>
 
@@ -180,14 +181,14 @@
                     <div class="flex-1 min-w-0">
                       <h4 class="text-[12px] font-black text-slate-800 uppercase tracking-tight truncate italic">Ref: {ref.title}</h4>
                       <p class="text-[9px] font-bold text-[#0D9488] uppercase tracking-widest mt-1">Video Tutorial Tambahan</p>
-                      <span class="text-[10px] font-black text-slate-400 uppercase tracking-widest mt-2 block">Klik untuk Putar ➔</span>
+                      <span class="text-[10px] font-black text-slate-400 uppercase tracking-widest mt-2 inline-flex items-center gap-1.5">Klik untuk Putar <Play size={12} fill="currentColor" /></span>
                     </div>
                   </button>
                 {/each}
               </div>
             {:else}
               <div class="bg-slate-50 rounded-[2.5rem] p-12 text-center border-2 border-dashed border-slate-200">
-                <span class="text-3xl block mb-4 grayscale opacity-40">🛠️</span>
+                <span class="mb-4 inline-flex text-slate-300"><Wrench size={30} /></span>
                 <p class="text-slate-400 font-black uppercase text-[10px] tracking-[0.3em]">Fitur sedang dioptimasi oleh admin Khwarizmi.</p>
               </div>
             {/if}
@@ -217,7 +218,7 @@
                 ${completedVideos.includes(item.id) ? "bg-emerald-100 text-emerald-600" : currentVideo.id === item.id ? "bg-[#14B8A6] text-white rotate-6" : "bg-white text-slate-400 group-hover:text-[#0D9488]"}`}
               >
                 {#if completedVideos.includes(item.id)}
-                  ✓
+                  <Check size={16} strokeWidth={3} />
                 {:else}
                   {i + 1}
                 {/if}
@@ -231,8 +232,8 @@
                   {item.title}
                 </span>
                 <div class="flex items-center gap-3">
-                  <span class="text-[9px] font-black text-slate-400 uppercase tracking-widest opacity-60">
-                    🕒 {item.duration}
+                  <span class="text-[9px] font-black text-slate-400 uppercase tracking-widest opacity-60 inline-flex items-center gap-1.5">
+                    <Clock size={12} /> {item.duration}
                   </span>
                 </div>
               </div>
@@ -256,7 +257,7 @@
           <p class="text-[11px] text-slate-400 leading-relaxed font-medium italic opacity-90">Bergabunglah dengan Discord komunitas Khwarizmi Academy untuk tanya jawab materi ini.</p>
         </div>
         <button class="w-full py-4 bg-white text-slate-900 rounded-2xl text-[10px] font-black uppercase tracking-[0.3em] transition-all hover:bg-[#F59E0B] hover:text-white active:scale-95 shadow-xl italic relative z-10">
-          Open Community ➔
+          <span class="inline-flex items-center justify-center gap-2">Open Community <ArrowRight size={15} /></span>
         </button>
       </div>
     </aside>

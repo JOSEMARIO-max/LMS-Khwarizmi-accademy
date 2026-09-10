@@ -1,6 +1,6 @@
 <script lang="ts">
   import { onMount } from "svelte";
-  import { Palette, Check } from "@lucide/svelte";
+  import { Palette, Check, Play } from "@lucide/svelte";
 
   const words = ["Web Development", "UI/UX DESIGN", "Animation", "Videography", "Frontend Development", "Backend Development"];
   
@@ -83,7 +83,7 @@
             href="/categories"
             class="flex w-full items-center justify-center gap-3 rounded-full border border-gray-100 bg-white px-8 py-3.5 text-sm font-bold text-gray-800 transition-all hover:bg-gray-50 active:scale-95 sm:w-auto lg:px-9 lg:py-4"
           >
-            <span class="flex h-5 w-5 items-center justify-center rounded-full bg-orange-50 text-[9px] text-[#f67d26]">▶</span>
+            <span class="flex h-5 w-5 items-center justify-center rounded-full bg-orange-50 text-[#f67d26]"><Play size={10} fill="currentColor" /></span>
             Eksplorasi Kelas
           </a>
 

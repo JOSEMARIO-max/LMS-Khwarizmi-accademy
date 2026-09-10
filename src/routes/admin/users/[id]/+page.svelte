@@ -1,7 +1,7 @@
 <script lang="ts">
   import { fade, fly, slide } from "svelte/transition";
   import toast, { Toaster } from "svelte-french-toast";
-  import { ArrowLeft, Send, CheckCircle, Clock, MessageSquare, FileText, Download, Plus, Calendar, User, Trash2, UploadCloud, Paperclip, ExternalLink, Image as ImageIcon } from "@lucide/svelte";
+  import { ArrowLeft, ArrowRight, Send, CheckCircle, Clock, MessageSquare, FileText, Download, Plus, Calendar, User, Trash2, UploadCloud, Paperclip, ExternalLink, X, Image as ImageIcon } from "@lucide/svelte";
 
   // --- TYPES ---
   type Attachment = {
@@ -157,7 +157,7 @@
       onclick={() => (isAddingTask = !isAddingTask)}
       class="bg-[#14B8A6] text-white px-8 py-4 rounded-2xl font-black text-xs uppercase tracking-[0.2em] shadow-xl shadow-teal-100 hover:bg-slate-900 transition-all active:scale-95 italic"
     >
-      {isAddingTask ? "✕ Close Form" : "+ Give New Assignment"}
+      {#if isAddingTask}<span class="inline-flex items-center gap-2"><X size={14} /> Close Form</span>{:else}<span class="inline-flex items-center gap-2"><Plus size={14} /> Give New Assignment</span>{/if}
     </button>
   </nav>
 
@@ -194,7 +194,7 @@
         </div>
       </div>
       <div class="flex justify-end pt-4">
-        <button onclick={handleSendTask} class="bg-slate-900 text-white px-12 py-4 rounded-2xl font-black text-[10px] uppercase tracking-[0.3em] hover:bg-[#14B8A6] transition-all italic">Confirm & Send ➔</button>
+        <button onclick={handleSendTask} class="bg-slate-900 text-white px-12 py-4 rounded-2xl font-black text-[10px] uppercase tracking-[0.3em] hover:bg-[#14B8A6] transition-all italic inline-flex items-center gap-2">Confirm & Send <ArrowRight size={14} /></button>
       </div>
     </div>
   {/if}
@@ -280,7 +280,7 @@
                 <div transition:slide class="flex items-center gap-2 px-4 py-2 bg-[#14B8A6]/10 rounded-xl border border-[#14B8A6]/20">
                   <Paperclip size={12} class="text-[#14B8A6]" />
                   <span class="text-[9px] font-black text-[#0D9488] truncate flex-1">{feedbackFile[assignment.id]?.name}</span>
-                  <button onclick={() => (feedbackFile[assignment.id] = null)} class="text-rose-500 font-bold text-xs">✕</button>
+                  <button onclick={() => (feedbackFile[assignment.id] = null)} class="text-rose-500 font-bold" aria-label="Hapus"><X size={14} /></button>
                 </div>
               {/if}
               <div class="relative flex items-center gap-2">

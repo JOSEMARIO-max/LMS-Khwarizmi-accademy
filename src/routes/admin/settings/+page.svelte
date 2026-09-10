@@ -1,6 +1,7 @@
 <script lang="ts">
   import { fade, slide, scale, fly } from "svelte/transition";
   import toast, { Toaster } from "svelte-french-toast";
+  import { Search, Pencil, Trash2, Zap } from "@lucide/svelte";
 
   // --- SVELTE 5 STATE (RUNES) ---
   let siteName = $state("Khwarizmi Academy");
@@ -31,7 +32,7 @@
   function toggleMaintenance() {
     maintenanceMode = !maintenanceMode;
     if(maintenanceMode) {
-      toast("Mode Pemeliharaan Aktif", { icon: '🚧', style: 'border-radius: 12px; background: #334155; color: #fff;' });
+      toast("Mode Pemeliharaan Aktif", { style: 'border-radius: 12px; background: #334155; color: #fff;' });
     } else {
       toast.success("Sistem Kembali Online!");
     }
@@ -64,7 +65,7 @@
         toast.success("Berhasil diupdate", { id: t });
       } else {
         coupons = [{ id: Date.now(), ...couponForm, code: couponForm.code.toUpperCase(), used: 0, status: "Active" }, ...coupons];
-        toast.success("Kupon Aktif!", { id: t, icon: "🎫" });
+        toast.success("Kupon Aktif!", { id: t });
       }
       isCouponModalOpen = false;
     }, 800);
@@ -74,7 +75,7 @@
     if (deletingId) {
       const target = coupons.find((c) => c.id === deletingId);
       coupons = coupons.filter((c) => c.id !== deletingId);
-      toast.success(`${target?.code} Dihapus`, { icon: "🗑️" });
+      toast.success(`${target?.code} Dihapus`);
       isDeleteModalOpen = false;
       deletingId = null;
     }
@@ -136,7 +137,7 @@
         </div>
 
         <div class="relative group">
-            <span class="absolute left-4 top-1/2 -translate-y-1/2 opacity-30 group-focus-within:opacity-100 transition-opacity">🔍</span>
+            <span class="absolute left-4 top-1/2 -translate-y-1/2 opacity-30 group-focus-within:opacity-100 transition-opacity"><Search size={16} /></span>
             <input 
               type="text" 
               bind:value={searchQuery}
@@ -176,8 +177,8 @@
                 </td>
                 <td class="px-8 py-6 text-right">
                   <div class="flex justify-end gap-2 opacity-40 group-hover:opacity-100 transition-opacity">
-                    <button onclick={() => openEditModal(c)} class="p-2.5 bg-white border border-slate-200 text-slate-500 rounded-xl hover:border-teal-500 hover:text-teal-600 transition-all active:scale-90">✏️</button>
-                    <button onclick={() => triggerDelete(c.id)} class="p-2.5 bg-white border border-slate-200 text-slate-500 rounded-xl hover:border-rose-500 hover:text-rose-600 transition-all active:scale-90">🗑️</button>
+                    <button onclick={() => openEditModal(c)} class="p-2.5 bg-white border border-slate-200 text-slate-500 rounded-xl hover:border-teal-500 hover:text-teal-600 transition-all active:scale-90" aria-label="Edit"><Pencil size={16} /></button>
+                    <button onclick={() => triggerDelete(c.id)} class="p-2.5 bg-white border border-slate-200 text-slate-500 rounded-xl hover:border-rose-500 hover:text-rose-600 transition-all active:scale-90" aria-label="Hapus"><Trash2 size={16} /></button>
                   </div>
                 </td>
               </tr>
@@ -197,7 +198,7 @@
       <div class="absolute -top-10 -right-10 w-40 h-40 bg-teal-500/20 rounded-full blur-3xl"></div>
       
       <div class="relative z-10 flex items-center gap-4">
-        <div class="w-12 h-12 bg-white/10 backdrop-blur-md rounded-2xl flex items-center justify-center border border-white/10 italic text-xl">⚡</div>
+        <div class="w-12 h-12 bg-white/10 backdrop-blur-md rounded-2xl flex items-center justify-center border border-white/10"><Zap size={20} /></div>
         <div>
           <h4 class="font-black text-sm uppercase tracking-widest italic leading-none">System Health</h4>
           <p class="text-[9px] text-teal-400 font-bold mt-2 uppercase tracking-widest italic">All systems operational</p>

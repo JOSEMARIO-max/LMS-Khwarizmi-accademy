@@ -6,6 +6,7 @@
   import { goto } from "$app/navigation";
   import { page } from "$app/state";
   import toast, { Toaster } from "svelte-french-toast";
+  import { GraduationCap, X, Check, Lock, LockOpen, ArrowRight } from "@lucide/svelte";
 
   // --- SVELTE 5 STATE (RUNES) ---
   let showWelcome = $state(false);
@@ -42,7 +43,7 @@
 
   function openPayment(course: any) {
     if ($ownedCourses.includes(course.id)) {
-      toast.success("✅ Kamu sudah punya kursus ini!");
+      toast.success("Kamu sudah punya kursus ini!");
       return;
     }
     selectedCourseToBuy = course;
@@ -62,7 +63,7 @@
       isLoading = false;
       showPaymentModal = false;
       toast.dismiss(loadingId);
-      toast.success(`Berhasil membeli ${selectedCourseToBuy.title}!`, { icon: "🎉" });
+      toast.success(`Berhasil membeli ${selectedCourseToBuy.title}!`);
     }, 2000);
   }
 </script>
@@ -74,8 +75,8 @@
     <div class="fixed inset-0 z-[100] grid place-items-center bg-slate-900/60 backdrop-blur-sm p-4" transition:fade>
       <div class="bg-white w-full max-w-md rounded-[2.5rem] overflow-hidden shadow-2xl" transition:scale={{ start: 0.95 }}>
         <div class="flex items-center justify-between bg-orange-50 px-8 py-5 border-b border-orange-100">
-          <h3 class="font-black text-orange-900 leading-none">Checkout Kelas 🎓</h3>
-          <button onclick={() => (showPaymentModal = false)} class="text-orange-900 hover:rotate-90 transition-transform font-bold">✕</button>
+          <h3 class="inline-flex items-center gap-2 font-black text-orange-900 leading-none"><GraduationCap size={18} /> Checkout Kelas</h3>
+          <button onclick={() => (showPaymentModal = false)} aria-label="Tutup" class="text-orange-900 hover:rotate-90 transition-transform font-bold"><X size={20} /></button>
         </div>
 
         <div class="p-8 bg-slate-50 border-b border-slate-100 space-y-3">
@@ -99,13 +100,13 @@
                 <span class="text-[10px] font-black uppercase tracking-tighter text-slate-800">{method}</span>
                 <span class="text-[8px] font-bold text-slate-400 uppercase tracking-widest">{method === "gopay" || method === "qris" ? "E-Wallet" : "VA Account"}</span>
                 {#if selectedPayment === method}
-                  <div class="absolute top-2 right-2 text-kh-orange text-[10px]">✓</div>
+                  <div class="absolute top-2 right-2 text-kh-orange"><Check size={12} strokeWidth={3} /></div>
                 {/if}
               </button>
             {/each}
           </div>
           <button onclick={processPayment} disabled={isLoading} class="w-full py-4 rounded-2xl bg-slate-900 text-white font-black text-sm shadow-xl shadow-slate-200 transition-all hover:bg-kh-orange active:scale-95 disabled:bg-slate-200">
-            {isLoading ? "⏳ Memproses..." : "Bayar Sekarang 🔒"}
+            {#if isLoading}Memproses...{:else}<span class="inline-flex items-center justify-center gap-2"><Lock size={16} /> Bayar Sekarang</span>{/if}
           </button>
         </div>
       </div>
@@ -153,11 +154,11 @@
 
           {#if isOwned}
             <div class="absolute inset-0 bg-emerald-600/90 flex items-center justify-center p-4">
-              <span class="px-6 py-2 rounded-full border-2 border-white text-white font-black text-xs uppercase tracking-widest">✓ Siap Belajar</span>
+              <span class="inline-flex items-center gap-1.5 px-6 py-2 rounded-full border-2 border-white text-white font-black text-xs uppercase tracking-widest"><Check size={14} strokeWidth={3} /> Siap Belajar</span>
             </div>
           {:else if $isPremium}
             <div class="absolute inset-0 bg-kh-orange/80 flex items-center justify-center p-4 opacity-0 group-hover:opacity-100 transition-opacity">
-              <span class="text-white font-black text-2xl tracking-tighter">🔓 UNLOCKED</span>
+              <span class="inline-flex items-center gap-2 text-white font-black text-2xl tracking-tighter"><LockOpen size={22} /> UNLOCKED</span>
             </div>
           {/if}
           <div class="absolute top-4 left-4 bg-white/90 backdrop-blur-md px-3 py-1 rounded-lg text-[9px] font-black text-slate-900 uppercase tracking-widest shadow-sm">{item.category}</div>
@@ -167,7 +168,7 @@
           <h3 class="text-xl font-bold text-slate-900 leading-tight flex-1">{item.title}</h3>
 
           {#if isOwned}
-            <a href="/user/lesson" class="w-full py-4 rounded-2xl bg-emerald-50 text-emerald-700 font-black text-center text-sm transition-all hover:bg-emerald-100">Lanjut Belajar ➔</a>
+            <a href="/user/lesson" class="w-full py-4 rounded-2xl bg-emerald-50 text-emerald-700 font-black text-center text-sm transition-all hover:bg-emerald-100 inline-flex items-center justify-center gap-2">Lanjut Belajar <ArrowRight size={16} /></a>
           {:else if $isPremium}
             <button onclick={() => openPayment(item)} class="w-full py-4 rounded-2xl bg-kh-orange text-white font-black text-sm transition-all hover:bg-orange-600 shadow-lg shadow-orange-100">Ambil Kelas (Gratis)</button>
           {:else}

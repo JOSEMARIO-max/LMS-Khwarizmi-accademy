@@ -2,6 +2,7 @@
   import { fade, fly, slide } from "svelte/transition";
   import { goto } from "$app/navigation";
   import toast, { Toaster } from "svelte-french-toast"; // Import Toast
+  import { ArrowLeft, Rocket, Link2, Trash2, Image as ImageIcon, Lightbulb } from "@lucide/svelte";
 
   // --- STATE KURSUS (RUNES) ---
   let courseTitle = $state("");
@@ -15,7 +16,6 @@
   function addLesson() {
     lessons = [...lessons, { id: Date.now(), title: "", url: "" }];
     toast.success("Baris materi baru ditambahkan", {
-      icon: "📝",
       style: "border-radius: 15px; font-weight: 800; font-size: 13px; border: 1px solid #14B8A6; color: #0D9488;",
     });
   }
@@ -55,7 +55,7 @@
       toast.success("Hampir selesai, memproses metadata...", { id: uploadToast });
 
       setTimeout(() => {
-        toast.success("Kursus Berhasil Dipublish! 🚀", {
+        toast.success("Kursus Berhasil Dipublish!", {
           id: uploadToast,
           duration: 4000,
           style: "background: #0D9488; color: white; font-weight: 900;",
@@ -68,7 +68,6 @@
 
   function handleSaveDraft() {
     toast.success("Draft kursus tersimpan aman.", {
-      icon: "💾",
       position: "bottom-right",
       style: "border-radius: 15px; font-weight: 800; border: 1px solid #F59E0B; color: #D97706;",
     });
@@ -81,7 +80,7 @@
   <div class="flex flex-col md:flex-row items-center justify-between gap-6 mb-10">
     <div class="flex flex-col">
       <a href="/admin/content" class="text-slate-400 hover:text-[#0D9488] font-black text-[10px] uppercase tracking-widest transition-all flex items-center gap-2 mb-2 italic">
-        <span class="text-lg">←</span> Back to Manager
+        <ArrowLeft size={16} /> Back to Manager
       </a>
       <h1 class="text-3xl font-black text-slate-900 tracking-tighter uppercase italic leading-none">Create New Course</h1>
     </div>
@@ -96,7 +95,7 @@
         onclick={handleSave}
         class="flex-1 md:flex-none px-10 py-3.5 rounded-2xl bg-[#14B8A6] text-white font-black shadow-xl shadow-teal-100 hover:bg-slate-900 transition-all active:scale-95 text-[10px] uppercase tracking-[0.2em] cursor-pointer italic"
       >
-        Publish Course 🚀
+        <span class="inline-flex items-center justify-center gap-2">Publish Course <Rocket size={15} /></span>
       </button>
     </div>
   </div>
@@ -192,7 +191,7 @@
                     <label class="text-[9px] font-black text-slate-400 uppercase tracking-[0.2em] px-1 opacity-60 italic leading-none">Video URL (YouTube/Cloud)</label>
                     <div class="flex gap-3">
                       <div class="relative flex-1">
-                        <span class="absolute left-3 top-1/2 -translate-y-1/2 text-xs opacity-30 italic">🔗</span>
+                        <span class="absolute left-3 top-1/2 -translate-y-1/2 text-slate-300"><Link2 size={14} /></span>
                         <input
                           type="url"
                           bind:value={lesson.url}
@@ -204,7 +203,7 @@
                         onclick={() => removeLesson(lesson.id)}
                         class="w-11 h-11 flex items-center justify-center bg-white border border-slate-100 text-slate-300 hover:text-rose-500 hover:border-rose-200 rounded-xl transition-all shadow-sm active:scale-90 cursor-pointer"
                       >
-                        🗑️
+                        <Trash2 size={16} />
                       </button>
                     </div>
                   </div>
@@ -230,7 +229,7 @@
           <div
             class="aspect-video bg-slate-50 rounded-[2rem] border-2 border-dashed border-slate-200 flex flex-col items-center justify-center gap-4 group hover:border-[#14B8A6] transition-all cursor-pointer overflow-hidden relative shadow-inner"
           >
-            <div class="w-14 h-14 rounded-2xl bg-white flex items-center justify-center text-3xl shadow-sm group-hover:scale-110 transition-transform group-hover:rotate-6">🖼️</div>
+            <div class="w-14 h-14 rounded-2xl bg-white flex items-center justify-center text-3xl shadow-sm group-hover:scale-110 transition-transform group-hover:rotate-6 text-slate-400"><ImageIcon size={28} /></div>
             <div class="text-center px-4">
               <span class="text-[9px] font-black text-slate-400 uppercase tracking-widest block leading-relaxed italic opacity-60">Upload Cover Image</span>
               <span class="text-[8px] font-bold text-[#14B8A6] uppercase tracking-tighter italic mt-1 block">1280 x 720 px Recommended</span>
@@ -254,7 +253,7 @@
       <div class="bg-slate-900 p-10 rounded-[3rem] text-white space-y-6 relative overflow-hidden shadow-2xl shadow-teal-100 group">
         <div class="absolute -top-10 -right-10 w-32 h-32 bg-[#14B8A6]/20 rounded-full blur-3xl group-hover:scale-125 transition-transform duration-700"></div>
         <div class="relative z-10 italic">
-          <p class="text-[10px] font-black text-[#14B8A6] uppercase tracking-[0.3em] mb-4 opacity-80 leading-none">💡 Khwarizmi Tip</p>
+          <p class="text-[10px] font-black text-[#14B8A6] uppercase tracking-[0.3em] mb-4 opacity-80 leading-none inline-flex items-center gap-2"><Lightbulb size={13} /> Khwarizmi Tip</p>
           <p class="text-sm text-slate-300 leading-relaxed font-medium italic opacity-90">"Gunakan link dari YouTube (Unlisted) atau Vimeo untuk menghemat penyimpanan server internal Khwarizmi Academy."</p>
         </div>
       </div>

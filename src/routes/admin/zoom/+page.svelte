@@ -2,6 +2,7 @@
   import { fade, fly, slide } from "svelte/transition";
   import { goto } from "$app/navigation";
   import toast, { Toaster } from "svelte-french-toast";
+  import { ArrowRight, Link2, Lightbulb } from "@lucide/svelte";
 
   // --- STATE FORM (RUNES) ---
   let meetingTitle = $state("");
@@ -31,7 +32,6 @@
     setTimeout(() => {
       toast.success("Link Zoom berhasil dipublish ke siswa!", {
         id: t,
-        icon: "🚀",
         style: "border-radius: 15px; font-weight: 800; background: #0D9488; color: white;",
       });
 
@@ -63,8 +63,8 @@
 
     <div class="flex gap-3">
       <button onclick={() => goto("/admin/schedule")} class="px-6 py-3.5 rounded-2xl bg-white border border-slate-200 text-slate-400 font-black text-[10px] uppercase tracking-widest hover:text-slate-900 transition-all">Cancel</button>
-      <button onclick={handleCreateMeeting} class="px-10 py-3.5 rounded-2xl bg-[#14B8A6] text-white font-black text-[10px] uppercase tracking-[0.2em] shadow-xl shadow-teal-100 hover:bg-slate-900 transition-all active:scale-95 italic"
-        >Publish Meeting ➔</button
+      <button onclick={handleCreateMeeting} class="inline-flex items-center justify-center gap-2 px-10 py-3.5 rounded-2xl bg-[#14B8A6] text-white font-black text-[10px] uppercase tracking-[0.2em] shadow-xl shadow-teal-100 hover:bg-slate-900 transition-all active:scale-95 italic"
+        >Publish Meeting <ArrowRight size={15} /></button
       >
     </div>
   </header>
@@ -126,7 +126,7 @@
           <div class="space-y-2">
             <label class="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1 italic">Zoom Join URL</label>
             <div class="relative">
-              <span class="absolute left-4 top-1/2 -translate-y-1/2 text-lg italic opacity-40">🔗</span>
+              <span class="absolute left-4 top-1/2 -translate-y-1/2 text-slate-300"><Link2 size={18} /></span>
               <input
                 type="url"
                 bind:value={zoomLink}
@@ -186,7 +186,7 @@
       <div class="bg-slate-900 p-10 rounded-[3rem] text-white relative overflow-hidden group shadow-2xl">
         <div class="absolute -top-10 -right-10 w-32 h-32 bg-[#14B8A6]/20 rounded-full blur-3xl group-hover:scale-125 transition-transform duration-700"></div>
         <div class="relative z-10 italic">
-          <p class="text-[10px] font-black text-[#14B8A6] uppercase tracking-[0.3em] mb-4 opacity-80 leading-none">💡 Admin Tip</p>
+          <p class="text-[10px] font-black text-[#14B8A6] uppercase tracking-[0.3em] mb-4 opacity-80 leading-none inline-flex items-center gap-2"><Lightbulb size={13} /> Admin Tip</p>
           <p class="text-sm text-slate-300 leading-relaxed font-medium italic opacity-90">"Gunakan meeting link permanen untuk kelas reguler agar siswa tidak bingung mencari link baru setiap minggu."</p>
         </div>
       </div>

@@ -1,6 +1,7 @@
 <script lang="ts">
   import { user, ownedCourses } from "$lib/stores";
   import { fly, fade } from "svelte/transition";
+  import { GraduationCap, Lock, ArrowRight, Play } from "@lucide/svelte";
 
   // --- DATA KURSUS ---
   const allCourses = [
@@ -21,7 +22,7 @@
 
 <div class="max-w-7xl mx-auto px-6 py-12 font-plus antialiased">
   <header class="text-center mb-16 space-y-4">
-    <div class="inline-block bg-orange-50 text-kh-orange border border-orange-100 px-5 py-2 rounded-full text-[10px] font-black uppercase tracking-[0.2em] shadow-sm">🎓 Dashboard Siswa</div>
+    <div class="inline-block bg-orange-50 text-kh-orange border border-orange-100 px-5 py-2 rounded-full text-[10px] font-black uppercase tracking-[0.2em] shadow-sm inline-flex items-center gap-2"><GraduationCap size={13} /> Dashboard Siswa</div>
     <h1 class="text-4xl md:text-5xl lg:text-6xl font-black text-slate-900 tracking-tighter leading-tight">
       Selamat Datang, <span class="text-kh-orange">{$user.name}</span>!
     </h1>
@@ -36,7 +37,7 @@
 
   {#if myLessons.length === 0}
     <div in:fly={{ y: 20 }} class="max-w-2xl mx-auto bg-white p-12 lg:p-20 rounded-[3rem] border-2 border-dashed border-slate-200 text-center shadow-2xl shadow-slate-100 space-y-8">
-      <div class="w-24 h-24 bg-orange-50 rounded-full flex items-center justify-center mx-auto text-5xl">🔒</div>
+      <div class="w-24 h-24 bg-orange-50 rounded-full flex items-center justify-center mx-auto text-kh-orange"><Lock size={44} /></div>
       <div class="space-y-3">
         <h3 class="text-2xl font-black text-slate-900 tracking-tight">Akses Terkunci</h3>
         <p class="text-slate-500 font-medium leading-relaxed px-4">Kamu belum memiliki kelas aktif. Silakan beli kursus untuk membuka materi belajar dan bimbingan eksklusif.</p>
@@ -57,7 +58,7 @@
             <div class="absolute inset-0 bg-black/20 transition-opacity opacity-100 group-hover:opacity-40"></div>
 
             <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity z-10">
-              <div class="w-14 h-14 bg-white/90 backdrop-blur-md rounded-full flex items-center justify-center text-kh-orange text-xl shadow-2xl translate-y-4 group-hover:translate-y-0 transition-transform">▶</div>
+              <div class="w-14 h-14 bg-white/90 backdrop-blur-md rounded-full flex items-center justify-center text-kh-orange shadow-2xl translate-y-4 group-hover:translate-y-0 transition-transform"><Play size={22} fill="currentColor" /></div>
             </div>
 
             <div class="absolute top-4 left-4 z-10 bg-white/95 px-4 py-1.5 rounded-xl text-[9px] font-black text-kh-orange uppercase tracking-widest shadow-sm">
@@ -84,7 +85,7 @@
               <p class="text-[10px] font-bold text-slate-300 italic">{lesson.totalMateri} Materi Video</p>
             </div>
 
-            <a href="/user/courses/{lesson.id}" class="w-full bg-slate-900 text-white py-4 rounded-2xl font-black text-sm text-center shadow-lg shadow-slate-100 transition-all hover:bg-kh-orange active:scale-95"> Lanjut Belajar ➔ </a>
+            <a href="/user/courses/{lesson.id}" class="w-full bg-slate-900 text-white py-4 rounded-2xl font-black text-sm text-center shadow-lg shadow-slate-100 transition-all hover:bg-kh-orange active:scale-95 inline-flex items-center justify-center gap-2">Lanjut Belajar <ArrowRight size={16} /></a>
           </div>
         </div>
       {/each}

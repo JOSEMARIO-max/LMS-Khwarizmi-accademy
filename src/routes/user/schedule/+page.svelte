@@ -1,5 +1,6 @@
 <script lang="ts">
   import { fade, fly } from "svelte/transition";
+  import { CalendarDays, Download, ArrowRight, Bell } from "@lucide/svelte";
 
   // --- SVELTE 5 RUNES (CALENDAR LOGIC) ---
   const now = new Date();
@@ -58,10 +59,10 @@
     <main class="space-y-8">
       <header class="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
-          <h1 class="text-3xl font-black text-slate-900 tracking-tight">Schedule 📅</h1>
+          <h1 class="flex items-center gap-3 text-3xl font-black text-slate-900 tracking-tight">Schedule <CalendarDays size={26} class="text-kh-orange" /></h1>
           <p class="text-slate-500 font-medium mt-1">Don't miss your class today!</p>
         </div>
-        <button class="flex items-center gap-2 bg-white border border-slate-200 px-6 py-3 rounded-2xl text-sm font-bold text-slate-700 hover:border-kh-orange hover:text-kh-orange transition-all shadow-sm"> Download PDF 📥 </button>
+        <button class="flex items-center gap-2 bg-white border border-slate-200 px-6 py-3 rounded-2xl text-sm font-bold text-slate-700 hover:border-kh-orange hover:text-kh-orange transition-all shadow-sm"><Download size={16} /> Download PDF</button>
       </header>
 
       <section>
@@ -94,7 +95,7 @@
 
               <div class="pt-4 md:pt-0">
                 {#if c.status === "Live Now"}
-                  <a href="/user/class/{c.id}" class="inline-block bg-slate-900 text-white px-8 py-3.5 rounded-2xl text-sm font-black shadow-lg shadow-slate-200 hover:bg-kh-orange transition-all active:scale-95"> Join Class ➔ </a>
+                  <a href="/user/class/{c.id}" class="inline-flex items-center gap-2 bg-slate-900 text-white px-8 py-3.5 rounded-2xl text-sm font-black shadow-lg shadow-slate-200 hover:bg-kh-orange transition-all active:scale-95">Join Class <ArrowRight size={16} /></a>
                 {:else}
                   <button disabled class="bg-slate-50 text-slate-300 px-8 py-3.5 rounded-2xl text-sm font-black cursor-not-allowed"> Upcoming </button>
                 {/if}
@@ -149,7 +150,7 @@
         <div class="absolute -top-6 -right-6 w-24 h-24 bg-kh-orange/10 rounded-full blur-2xl"></div>
 
         <div class="flex items-center gap-4 relative z-10">
-          <div class="w-14 h-14 bg-white/10 backdrop-blur-md rounded-2xl flex items-center justify-center text-2xl">🔔</div>
+          <div class="w-14 h-14 bg-white/10 backdrop-blur-md rounded-2xl flex items-center justify-center text-kh-orange"><Bell size={24} /></div>
           <div>
             <h4 class="text-kh-orange font-black text-sm uppercase tracking-widest">Mid-Term Exam</h4>
             <p class="text-[10px] text-slate-400 font-bold">Don't forget to prepare!</p>

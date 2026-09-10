@@ -4,6 +4,7 @@
   import { UserService } from "$lib/services/user/user-service";
   import { authStore } from "$lib/stores/auth-store.svelte";
   import type { CategoryStat, Mentor, Course, LearningActivity } from "$lib/types/user/dashboard";
+  import { ArrowRight, Sparkles, ChevronLeft, ChevronRight, MoreVertical } from "@lucide/svelte";
 
   // --- SVELTE 5 RUNES (PENGGANTI STORES LAMA) ---
   let categoryStats = $state<CategoryStat[]>([]);
@@ -55,9 +56,9 @@
         <div class="relative z-10 max-sm:max-w-full max-w-sm space-y-4">
           <span class="inline-block bg-white/20 px-3 py-1 rounded-lg text-[9px] font-black uppercase tracking-wider">Online Course</span>
           <h1 class="text-2xl font-black leading-tight tracking-tight">Sharpen Your Skills with <br /> Professional Courses</h1>
-          <a href="#catalog" class="inline-flex items-center gap-2 bg-slate-900 px-5 py-2.5 rounded-full text-xs font-bold transition-all hover:scale-105 active:scale-95 shadow-lg shadow-black/20">Join Now ➔</a>
+          <a href="#catalog" class="inline-flex items-center gap-2 bg-slate-900 px-5 py-2.5 rounded-full text-xs font-bold transition-all hover:scale-105 active:scale-95 shadow-lg shadow-black/20">Join Now <ArrowRight size={14} /></a>
         </div>
-        <div class="absolute -right-8 -bottom-8 text-[10rem] font-black opacity-10 select-none">✨</div>
+        <div class="absolute -right-6 -bottom-6 opacity-10 select-none"><Sparkles size={140} strokeWidth={1.2} /></div>
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -78,8 +79,8 @@
 
           {#if myCourses.length > 2}
             <div class="flex gap-1.5">
-              <button onclick={() => scroll("left")} class="w-8 h-8 rounded-full border border-slate-200 bg-white text-slate-400 hover:bg-slate-900 hover:text-white transition-all flex items-center justify-center text-xs">❮</button>
-              <button onclick={() => scroll("right")} class="w-8 h-8 rounded-full border border-slate-200 bg-white text-slate-400 hover:bg-slate-900 hover:text-white transition-all flex items-center justify-center text-xs">❯</button>
+              <button aria-label="Sebelumnya" onclick={() => scroll("left")} class="w-8 h-8 rounded-full border border-slate-200 bg-white text-slate-400 hover:bg-slate-900 hover:text-white transition-all flex items-center justify-center"><ChevronLeft size={16} /></button>
+              <button aria-label="Berikutnya" onclick={() => scroll("right")} class="w-8 h-8 rounded-full border border-slate-200 bg-white text-slate-400 hover:bg-slate-900 hover:text-white transition-all flex items-center justify-center"><ChevronRight size={16} /></button>
             </div>
           {/if}
         </div>
@@ -108,7 +109,7 @@
         {:else}
           <div class="bg-white border-2 border-dashed border-slate-200 rounded-3xl py-10 text-center">
             <p class="text-slate-400 font-bold text-xs">Belum ada kursus yang aktif.</p>
-            <a href="#catalog" class="inline-block text-kh-orange font-black text-xs mt-2 hover:underline">Mulai Belajar ➔</a>
+            <a href="#catalog" class="inline-flex items-center gap-1 text-kh-orange font-black text-xs mt-2 hover:underline">Mulai Belajar <ArrowRight size={14} /></a>
           </div>
         {/if}
       </section>
@@ -118,7 +119,7 @@
       <div class="bg-white p-6 rounded-[2rem] border border-slate-50 shadow-sm space-y-6">
         <div class="flex items-center justify-between">
           <h3 class="font-black text-slate-800 text-xs">Statistic</h3>
-          <span class="text-slate-300">⋮</span>
+          <span class="text-slate-300"><MoreVertical size={16} /></span>
         </div>
 
         <div class="text-center space-y-3">

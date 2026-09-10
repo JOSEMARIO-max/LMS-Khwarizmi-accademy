@@ -1,5 +1,6 @@
 <script lang="ts">
   import toast, { Toaster } from "svelte-french-toast";
+  import { TriangleAlert, Gem, X, Check, Lock, Camera, Rocket, Wrench } from "@lucide/svelte";
   import { fade, scale } from "svelte/transition";
   import { user, isPremium, ownedCourses } from "$lib/stores";
   import { goto } from "$app/navigation";
@@ -44,7 +45,7 @@
 
     isLoading = false;
     toast.dismiss(loadingId);
-    toast.error("Langganan Dihentikan.", { icon: "🗑️" });
+    toast.error("Langganan Dihentikan.");
   }
 
   // LOGIC PEMBAYARAN
@@ -61,7 +62,7 @@
 
     isLoading = false;
     toast.dismiss(loadingId);
-    toast.success(`Pembayaran ${selectedPayment.toUpperCase()} Berhasil!`, { icon: "🎉" });
+    toast.success(`Pembayaran ${selectedPayment.toUpperCase()} Berhasil!`);
 
     setTimeout(() => goto("/user/courses?new=true"), 1500);
   }
@@ -73,7 +74,7 @@
   <div class="fixed inset-0 z-[100] grid place-items-center bg-slate-900/60 backdrop-blur-sm p-4" transition:fade>
     {#if showCancelModal}
       <div class="bg-white p-8 rounded-[2.5rem] w-full max-w-sm text-center shadow-2xl" transition:scale={{ start: 0.9 }}>
-        <div class="text-5xl mb-4">⚠️</div>
+        <div class="mb-4 inline-flex text-amber-500"><TriangleAlert size={44} /></div>
         <h3 class="text-xl font-black text-slate-900 mb-2">Berhenti Berlangganan?</h3>
         <p class="text-sm text-slate-500 mb-8 leading-relaxed font-medium">Akses premium dicabut dan semua kursus di Dashboard akan dihapus.</p>
         <div class="flex flex-col gap-3">
@@ -86,8 +87,8 @@
     {#if showPaymentModal}
       <div class="bg-white w-full max-w-md rounded-[2.5rem] overflow-hidden shadow-2xl" transition:scale={{ start: 0.95 }}>
         <div class="flex justify-between items-center bg-orange-50 px-8 py-5 border-b border-orange-100">
-          <h3 class="font-black text-orange-900">Checkout PRO 💎</h3>
-          <button onclick={() => (showPaymentModal = false)} class="text-orange-900 font-bold">✕</button>
+          <h3 class="inline-flex items-center gap-2 font-black text-orange-900"><Gem size={18} /> Checkout PRO</h3>
+          <button onclick={() => (showPaymentModal = false)} aria-label="Tutup" class="text-orange-900 font-bold"><X size={20} /></button>
         </div>
         <div class="p-8 bg-slate-50 space-y-2 border-b border-slate-100 text-sm">
           <div class="flex justify-between font-medium text-slate-400"><span>Paket</span><strong class="text-slate-800">Bulanan (Auto-renew)</strong></div>
@@ -107,12 +108,12 @@
                 <span class="font-black text-[10px] uppercase">{method}</span>
                 <span class="text-[8px] font-bold text-slate-400">PAYMENT</span>
                 {#if selectedPayment === method}
-                  <div class="absolute top-2 right-2 text-kh-orange text-[10px]">✓</div>
+                  <div class="absolute top-2 right-2 text-kh-orange"><Check size={12} strokeWidth={3} /></div>
                 {/if}
               </button>
             {/each}
           </div>
-          <button onclick={processPayment} class="w-full py-4 bg-slate-900 text-white rounded-2xl font-black text-sm hover:bg-kh-orange shadow-lg shadow-slate-200 transition-all active:scale-95">Bayar Sekarang 🔒</button>
+          <button onclick={processPayment} class="w-full py-4 bg-slate-900 text-white rounded-2xl font-black text-sm hover:bg-kh-orange shadow-lg shadow-slate-200 transition-all active:scale-95 inline-flex items-center justify-center gap-2"><Lock size={16} /> Bayar Sekarang</button>
           <p class="text-center text-[10px] text-slate-300 font-bold uppercase tracking-widest italic">Encrypted Secure Payment</p>
         </div>
       </div>
@@ -128,7 +129,7 @@
     <div class="px-8 pb-8 flex flex-col md:flex-row items-end gap-6 -mt-16 relative z-10">
       <div class="relative shrink-0">
         <img src={$user.avatar} alt="avatar" class="w-32 h-32 rounded-full border-8 border-white bg-white shadow-xl object-cover" />
-        <button onclick={() => fileInput?.click()} class="absolute bottom-2 right-0 w-10 h-10 bg-slate-900 text-white rounded-full border-4 border-white flex items-center justify-center hover:bg-kh-orange transition-all">📷</button>
+        <button onclick={() => fileInput?.click()} class="absolute bottom-2 right-0 w-10 h-10 bg-slate-900 text-white rounded-full border-4 border-white flex items-center justify-center hover:bg-kh-orange transition-all" aria-label="Ubah foto"><Camera size={16} /></button>
         <input type="file" hidden bind:this={fileInput} onchange={handlePhotoChange} />
       </div>
       <div class="flex-1 pb-2">
@@ -213,7 +214,7 @@
 
           {#if $isPremium}
             <div class="bg-orange-50/50 rounded-[2.5rem] p-8 border-2 border-orange-100 space-y-8 relative overflow-hidden">
-              <div class="absolute -top-10 -right-10 text-[10rem] font-black text-kh-orange/5 select-none">💎</div>
+              <div class="absolute -top-6 -right-6 text-kh-orange/5 select-none"><Gem size={150} strokeWidth={1} /></div>
               <div class="flex flex-wrap justify-between items-start gap-4">
                 <div class="space-y-2">
                   <h4 class="text-2xl font-black text-orange-900">Khwarizmi PRO Plan</h4>
@@ -222,10 +223,10 @@
                 <div class="text-3xl font-black text-orange-600 leading-none">Rp 150k<span class="text-sm text-orange-400 font-bold tracking-normal">/bln</span></div>
               </div>
               <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <p class="flex items-center gap-3 text-sm font-bold text-orange-800/70"><span>✅</span> Full Access Courses</p>
-                <p class="flex items-center gap-3 text-sm font-bold text-orange-800/70"><span>✅</span> Premium Assets Download</p>
-                <p class="flex items-center gap-3 text-sm font-bold text-orange-800/70"><span>✅</span> Industry Certificates</p>
-                <p class="flex items-center gap-3 text-sm font-bold text-orange-800/70"><span>✅</span> Mentor Community Access</p>
+                <p class="flex items-center gap-3 text-sm font-bold text-orange-800/70"><Check size={16} class="text-kh-teal shrink-0" /> Full Access Courses</p>
+                <p class="flex items-center gap-3 text-sm font-bold text-orange-800/70"><Check size={16} class="text-kh-teal shrink-0" /> Premium Assets Download</p>
+                <p class="flex items-center gap-3 text-sm font-bold text-orange-800/70"><Check size={16} class="text-kh-teal shrink-0" /> Industry Certificates</p>
+                <p class="flex items-center gap-3 text-sm font-bold text-orange-800/70"><Check size={16} class="text-kh-teal shrink-0" /> Mentor Community Access</p>
               </div>
               <div class="flex items-center justify-between pt-8 border-t border-orange-100/50">
                 <span class="text-[10px] font-bold text-orange-300 uppercase tracking-[0.2em]">Next Invoice: 24 Feb 2026</span>
@@ -234,20 +235,20 @@
             </div>
           {:else}
             <div class="bg-slate-50 rounded-[2.5rem] p-8 border border-slate-100 text-center space-y-6">
-              <div class="w-20 h-20 bg-white rounded-full flex items-center justify-center mx-auto text-3xl shadow-sm">🚀</div>
+              <div class="w-20 h-20 bg-white rounded-full flex items-center justify-center mx-auto text-kh-orange shadow-sm"><Rocket size={30} /></div>
               <div class="space-y-2">
                 <h4 class="text-xl font-black text-slate-900">Free Starter Plan</h4>
                 <p class="text-slate-400 text-sm font-medium leading-relaxed">Upgrade untuk mengakses kembali kursus Anda dan membuka fitur Dashboard eksklusif.</p>
               </div>
-              <button onclick={() => (showPaymentModal = true)} class="inline-block bg-slate-900 text-white px-12 py-4 rounded-full font-black text-sm hover:bg-kh-orange transition-all shadow-xl shadow-slate-200"
-                >Aktifkan Kembali PRO 🚀</button
+              <button onclick={() => (showPaymentModal = true)} class="inline-flex items-center justify-center gap-2 bg-slate-900 text-white px-12 py-4 rounded-full font-black text-sm hover:bg-kh-orange transition-all shadow-xl shadow-slate-200"
+                >Aktifkan Kembali PRO <Rocket size={16} /></button
               >
             </div>
           {/if}
         </div>
       {:else}
         <div in:fade class="text-center py-20">
-          <div class="text-5xl mb-6">🛠️</div>
+          <div class="mb-6 inline-flex text-slate-300"><Wrench size={44} /></div>
           <h3 class="text-lg font-black text-slate-900">Segera Hadir</h3>
           <p class="text-slate-400 font-medium">Fitur Notifications & Password Security sedang dikembangkan.</p>
         </div>

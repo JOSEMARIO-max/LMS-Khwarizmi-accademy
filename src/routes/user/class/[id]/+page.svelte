@@ -1,6 +1,7 @@
 <script lang="ts">
   import { fade, fly, slide } from "svelte/transition";
   import { page } from "$app/state";
+  import { ArrowLeft, Video, Rocket, FolderOpen, NotebookPen, ArrowRight, Lightbulb } from "@lucide/svelte";
 
   // --- DATA KELAS (Simulasi Berdasarkan ID) ---
   const classId = page.params.id;
@@ -23,7 +24,7 @@
 <div class="max-w-7xl mx-auto px-6 py-8 font-plus antialiased text-slate-800">
   <nav class="mb-8">
     <a href="/user/schedule" class="group flex items-center gap-2 text-slate-400 font-bold text-xs transition-all hover:text-kh-orange uppercase tracking-widest">
-      <span class="text-lg transition-transform group-hover:-translate-x-1">←</span>
+      <span class="inline-flex transition-transform group-hover:-translate-x-1"><ArrowLeft size={16} /></span>
       Back to Schedule
     </a>
   </nav>
@@ -32,7 +33,7 @@
     <div class="space-y-8">
       <div class="relative aspect-video bg-slate-900 rounded-[3rem] overflow-hidden shadow-2xl border-4 border-white group">
         <div class="absolute inset-0 flex flex-col items-center justify-center text-center p-10">
-          <div class="w-24 h-24 bg-white/10 rounded-[2rem] flex items-center justify-center text-5xl mb-6 backdrop-blur-xl border border-white/20 group-hover:scale-110 transition-transform">🎥</div>
+          <div class="w-24 h-24 bg-white/10 rounded-[2rem] flex items-center justify-center text-white/90 mb-6 backdrop-blur-xl border border-white/20 group-hover:scale-110 transition-transform"><Video size={44} /></div>
           <h2 class="text-white text-2xl font-black italic uppercase tracking-tight mb-2">Ready to Join the Class?</h2>
           <p class="text-slate-400 text-sm font-medium max-w-sm mb-8">Siswa disarankan menggunakan aplikasi Zoom untuk pengalaman interaksi yang lebih stabil.</p>
 
@@ -42,7 +43,7 @@
               target="_blank"
               class="bg-indigo-600 hover:bg-kh-orange text-white px-10 py-4 rounded-2xl font-black text-xs uppercase tracking-[0.2em] transition-all shadow-xl shadow-indigo-900/50 active:scale-95"
             >
-              Launch Zoom App 🚀
+              <span class="inline-flex items-center gap-2">Launch Zoom App <Rocket size={15} /></span>
             </a>
             <a href={classDetail.zoomLink} target="_blank" class="bg-white/10 hover:bg-white/20 text-white border border-white/20 px-8 py-4 rounded-2xl font-black text-xs uppercase tracking-widest transition-all backdrop-blur-md">
               Join via Browser
@@ -94,18 +95,18 @@
         <div class="space-y-3">
           <button class="w-full flex items-center justify-between p-4 bg-slate-50 hover:bg-indigo-50 border border-slate-100 rounded-2xl transition-all group">
             <div class="flex items-center gap-3">
-              <span class="text-xl">📁</span>
+              <span class="text-indigo-500"><FolderOpen size={20} /></span>
               <span class="text-xs font-black uppercase text-slate-600 group-hover:text-indigo-600">Module Material</span>
             </div>
-            <span class="text-slate-300">➔</span>
+            <span class="text-slate-300"><ArrowRight size={16} /></span>
           </button>
 
           <button class="w-full flex items-center justify-between p-4 bg-slate-50 hover:bg-teal-50 border border-slate-100 rounded-2xl transition-all group">
             <div class="flex items-center gap-3">
-              <span class="text-xl">📝</span>
+              <span class="text-teal-500"><NotebookPen size={20} /></span>
               <span class="text-xs font-black uppercase text-slate-600 group-hover:text-teal-600">Class Notes</span>
             </div>
-            <span class="text-slate-300">➔</span>
+            <span class="text-slate-300"><ArrowRight size={16} /></span>
           </button>
         </div>
       </div>
@@ -125,7 +126,7 @@
 
       <div class="bg-slate-900 rounded-[2.5rem] p-8 text-white relative overflow-hidden">
         <div class="flex items-start gap-4 italic">
-          <span class="text-2xl">💡</span>
+          <span class="text-[#14B8A6]"><Lightbulb size={22} /></span>
           <div>
             <h4 class="font-black text-xs uppercase tracking-widest text-[#14B8A6] mb-2">Khwarizmi Tip</h4>
             <p class="text-[11px] text-slate-400 leading-relaxed font-medium">Gunakan headphone untuk fokus maksimal. Jangan ragu menyalakan mic jika ingin bertanya langsung pada mentor.</p>

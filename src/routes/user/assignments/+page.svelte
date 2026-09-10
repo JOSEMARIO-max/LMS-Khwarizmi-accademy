@@ -1,6 +1,7 @@
 <script lang="ts">
   import { tasks, isPremium, ownedCourses } from "$lib/stores";
   import { fade, scale, fly } from "svelte/transition";
+  import { ClipboardList, CalendarClock, Lock } from "@lucide/svelte";
 
   // --- SVELTE 5 STATE & DERIVED ---
   let activeFilter = $state("All");
@@ -37,7 +38,7 @@
 <div class="max-w-5xl mx-auto px-6 py-10 pb-24 font-plus">
   <header class="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-10">
     <div>
-      <h1 class="text-3xl font-black text-slate-900 tracking-tight italic uppercase">Assignments 📝</h1>
+      <h1 class="flex items-center gap-3 text-3xl font-black text-slate-900 tracking-tight italic uppercase">Assignments <ClipboardList size={26} class="text-kh-orange" /></h1>
       <p class="text-slate-500 font-medium italic">Selesaikan tugas dari instruktur untuk mengasah skill-mu.</p>
     </div>
 
@@ -98,7 +99,7 @@
             <p class="text-sm text-slate-500 line-clamp-2 mb-8 flex-1 italic font-medium leading-relaxed">{t.desc}</p>
 
             <div class="flex items-center justify-between pt-5 border-t border-slate-50 relative z-10">
-              <span class="text-[10px] font-black text-slate-400 italic uppercase tracking-widest">📅 {t.due}</span>
+              <span class="inline-flex items-center gap-1.5 text-[10px] font-black text-slate-400 italic uppercase tracking-widest"><CalendarClock size={13} /> {t.due}</span>
 
               <button
                 onclick={(e) => {
@@ -118,7 +119,7 @@
     </div>
   {:else}
     <div in:scale={{ start: 0.95 }} class="bg-white border-2 border-dashed border-slate-200 rounded-[3rem] p-16 text-center shadow-inner">
-      <div class="text-6xl mb-6 grayscale opacity-40">🔐</div>
+      <div class="mb-6 inline-flex text-slate-300"><Lock size={56} strokeWidth={1.5} /></div>
       <h3 class="text-2xl font-black text-slate-900 mb-3 uppercase italic tracking-tighter">Fitur Tugas Terkunci</h3>
       <p class="text-slate-500 max-w-md mx-auto mb-10 leading-relaxed font-medium italic">Menu ini khusus untuk siswa aktif Khwarizmi Academy. Silakan bergabung untuk mendapatkan tugas eksklusif dari instruktur.</p>
       <div class="flex flex-wrap justify-center gap-4 italic font-black">

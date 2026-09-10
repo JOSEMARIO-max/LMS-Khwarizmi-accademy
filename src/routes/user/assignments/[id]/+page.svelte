@@ -3,6 +3,7 @@
   import { tasks } from "$lib/stores";
   import { fade, fly } from "svelte/transition";
   import { cubicOut } from "svelte/easing";
+  import { Check, ArrowLeft, CalendarClock, User, Paperclip, CircleCheck, Clock, PartyPopper, FileText, CloudUpload } from "@lucide/svelte";
 
   // --- SVELTE 5 STATE & DERIVED ---
   const taskId = $derived(page.params.id);
@@ -70,7 +71,7 @@
       class="fixed bottom-10 right-10 z-50 flex items-center gap-4 bg-slate-900 text-white px-6 py-4 rounded-2xl shadow-2xl shadow-slate-900/20 border border-slate-700"
     >
       <div class="flex h-8 w-8 items-center justify-center rounded-full bg-emerald-500 text-white shadow-lg shadow-emerald-500/30">
-        <span class="text-sm font-bold">✓</span>
+        <Check size={16} strokeWidth={3} />
       </div>
       <div>
         <h4 class="text-sm font-black text-emerald-400">Submission Success!</h4>
@@ -79,7 +80,7 @@
     </div>
   {/if}
   <a href="/user/assignments" class="group inline-flex items-center gap-2 text-slate-400 font-bold text-sm mb-8 transition-all hover:text-kh-orange">
-    <span class="transition-transform group-hover:-translate-x-1">←</span>
+    <span class="inline-flex transition-transform group-hover:-translate-x-1"><ArrowLeft size={16} /></span>
     Back to Assignments
   </a>
 
@@ -103,10 +104,10 @@
 
         <div class="flex flex-wrap gap-6 text-sm font-bold text-slate-400">
           <div class="flex items-center gap-2">
-            <span class="text-lg">📅</span> Due: <span class="text-slate-600">{task.due}</span>
+            <CalendarClock size={16} /> Due: <span class="text-slate-600">{task.due}</span>
           </div>
           <div class="flex items-center gap-2">
-            <span class="text-lg">👤</span> Team: <span class="text-slate-600">Individual</span>
+            <User size={16} /> Team: <span class="text-slate-600">Individual</span>
           </div>
         </div>
       </div>
@@ -119,7 +120,7 @@
 
         <div class="flex items-center justify-between p-5 bg-slate-50 rounded-2xl border border-slate-100 group transition-all hover:bg-orange-50/50">
           <div class="flex items-center gap-4">
-            <div class="w-10 h-10 grid place-items-center bg-white rounded-xl shadow-sm text-xl">📎</div>
+            <div class="w-10 h-10 grid place-items-center bg-white rounded-xl shadow-sm text-slate-500"><Paperclip size={18} /></div>
             <div>
               <p class="text-sm font-bold text-slate-800">Reference_Guide.pdf</p>
               <p class="text-[10px] text-slate-400 font-bold uppercase tracking-tighter">Teacher's Guide • 2.4 MB</p>
@@ -154,13 +155,13 @@
           class={`flex items-center gap-3 p-4 rounded-2xl mb-8 border font-bold text-sm
           ${task.status === "Completed" ? "bg-emerald-50 border-emerald-100 text-emerald-700" : "bg-orange-50 border-orange-100 text-kh-orange"}`}
         >
-          <span class="text-base">{task.status === "Completed" ? "✅" : "⏳"}</span>
+          <span class="inline-flex">{#if task.status === "Completed"}<CircleCheck size={17} />{:else}<Clock size={17} />{/if}</span>
           Status: {task.status}
         </div>
 
         {#if task.status === "Completed"}
           <div class="text-center py-6" in:fade>
-            <div class="w-20 h-20 bg-emerald-50 rounded-full flex items-center justify-center mx-auto mb-4 text-4xl">🎉</div>
+            <div class="w-20 h-20 bg-emerald-50 rounded-full flex items-center justify-center mx-auto mb-4 text-emerald-500"><PartyPopper size={34} /></div>
             <p class="font-black text-slate-900 mb-1">Handed In!</p>
             <p class="text-[10px] text-slate-400 font-bold uppercase tracking-widest mb-6">12 Feb 2026 • 10:00 AM</p>
             <button class="w-full py-3 rounded-2xl border-2 border-slate-100 text-slate-400 text-sm font-bold transition-all hover:bg-rose-50 hover:text-rose-600 hover:border-rose-100"> Unsubmit </button>
@@ -178,7 +179,7 @@
           >
             {#if fileUploaded}
               <div class="space-y-4" in:fly={{ y: 10 }}>
-                <div class="text-4xl">📄</div>
+                <div class="inline-flex text-slate-500"><FileText size={34} /></div>
                 <div class="space-y-1 px-2">
                   <p class="text-xs font-black text-slate-900 truncate max-w-full">{fileUploaded.name}</p>
                   <p class="text-[10px] text-slate-400">{(fileUploaded.size / 1024).toFixed(1)} KB</p>
@@ -187,7 +188,7 @@
               </div>
             {:else}
               <div class="space-y-4">
-                <div class="text-4xl opacity-40">☁️</div>
+                <div class="inline-flex text-slate-300"><CloudUpload size={34} /></div>
                 <div class="space-y-1">
                   <p class="text-xs font-bold text-slate-500 leading-tight">Drag & Drop files here</p>
                   <p class="text-[10px] text-slate-400">PDF, ZIP, or Image (Max 10MB)</p>

@@ -1,5 +1,6 @@
 <script lang="ts">
   import { fade, fly, slide } from "svelte/transition";
+  import { ArrowLeft, Pencil } from "@lucide/svelte";
 
   // --- DATA JADWAL LENGKAP ---
   let selectedDate = $state("2026-02-23");
@@ -27,7 +28,7 @@
     <header class="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
       <div class="flex items-center gap-4">
         <a href="/admin" class="w-12 h-12 rounded-2xl bg-white border border-slate-200 flex items-center justify-center text-slate-400 hover:text-[#14B8A6] hover:border-[#14B8A6] transition-all group shadow-sm">
-          <span class="group-hover:-translate-x-1 transition-transform">←</span>
+          <span class="inline-flex group-hover:-translate-x-1 transition-transform"><ArrowLeft size={18} /></span>
         </a>
         <div>
           <h1 class="text-3xl font-black text-slate-900 italic uppercase tracking-tight">Class Scheduler</h1>
@@ -109,8 +110,8 @@
                   <p class="text-sm font-black text-slate-800 italic uppercase">{schedule.time}</p>
                   <p class="text-[9px] font-bold text-[#14B8A6] uppercase tracking-widest">{schedule.status}</p>
                 </div>
-                <button class="bg-slate-50 text-slate-400 p-4 rounded-2xl hover:bg-slate-900 hover:text-white transition-all font-black">
-                  ✏️
+                <button aria-label="Edit jadwal" class="bg-slate-50 text-slate-400 p-4 rounded-2xl hover:bg-slate-900 hover:text-white transition-all">
+                  <Pencil size={16} />
                 </button>
               </div>
             </div>
